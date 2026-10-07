@@ -1,0 +1,424 @@
+import { useState } from 'react';
+import { ArrowRight, Check, Layers, Menu, Sparkles, X } from 'lucide-react';
+
+import { Link } from '@/core/i18n/navigation';
+import { envConfigs } from '@/config';
+import { m } from '@/paraglide/messages.js';
+import { getLocale, setLocale } from '@/paraglide/runtime.js';
+import { StudioAccount } from '@/blocks/studio-account';
+import { BuiltWithShipAny } from '@/components/built-with-shipany';
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+} from '@/components/ui/dialog';
+
+import '@/styles/studio.css';
+import '@/styles/studio-pricing.css';
+
+export function StudioPricing() {
+  const [yearly, setYearly] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [selected, setSelected] = useState<'creator' | 'pro' | null>(null);
+  const navigation = [
+    { href: '/image-generator', label: m['studio.nav.create']() },
+    { href: '/transparent-png', label: m['studio.nav.png']() },
+    { href: '/image-editor', label: m['studio.nav.edit']() },
+    { href: '/prompts', label: m['studio.nav.prompts']() },
+    { href: '/pricing', label: m['studio.pricing.nav']() },
+  ];
+  const common = [
+    m['studio.pricing.generation'](),
+    m['studio.pricing.editing'](),
+    m['studio.pricing.png'](),
+    m['studio.pricing.ratios'](),
+  ];
+  const plans = [
+    {
+      id: 'free' as const,
+      name: m['studio.pricing.free.name'](),
+      copy: m['studio.pricing.free.copy'](),
+      price: 0,
+      annual: 0,
+      credits: 0,
+      features: [
+        m['studio.pricing.library'](),
+        m['studio.pricing.copy'](),
+        m['studio.pricing.workspace'](),
+      ],
+    },
+    {
+      id: 'creator' as const,
+      name: m['studio.pricing.creator.name'](),
+      copy: m['studio.pricing.creator.copy'](),
+      price: yearly ? 9 : 12,
+      annual: 108,
+      credits: 300,
+      features: common,
+    },
+    {
+      id: 'pro' as const,
+      name: m['studio.pricing.pro.name'](),
+      copy: m['studio.pricing.pro.copy'](),
+      price: yearly ? 24 : 29,
+      annual: 288,
+      credits: 1000,
+      features: common,
+    },
+  ];
+  const chosen = plans.find((plan) => plan.id === selected);
+  const comparison = [
+    { label: m['studio.pricing.library'](), free: true },
+    { label: m['studio.pricing.copy'](), free: true },
+    { label: m['studio.pricing.workspace'](), free: true },
+    { label: m['studio.pricing.generation'](), free: false },
+    { label: m['studio.pricing.editing'](), free: false },
+    { label: m['studio.pricing.png'](), free: false },
+  ];
+  const faqs = [
+    { q: m['studio.pricing.faq.pay.q'](), a: m['studio.pricing.faq.pay.a']() },
+    {
+      q: m['studio.pricing.faq.free.q'](),
+      a: m['studio.pricing.faq.free.a'](),
+    },
+    {
+      q: m['studio.pricing.faq.credit.q'](),
+      a: m['studio.pricing.faq.credit.a'](),
+    },
+    {
+      q: m['studio.pricing.faq.annual.q'](),
+      a: m['studio.pricing.faq.annual.a'](),
+    },
+    {
+      q: m['studio.pricing.faq.cancel.q'](),
+      a: m['studio.pricing.faq.cancel.a'](),
+    },
+    {
+      q: m['studio.pricing.faq.commercial.q'](),
+      a: m['studio.pricing.faq.commercial.a'](),
+    },
+  ];
+  return (
+    <div className="prism-site pricing-page">
+      <a className="prism-skip" href="#plans">
+        {m['studio.skip']()}
+      </a>
+      <header className="prism-header">
+        <Link className="prism-brand" href="/">
+          <img src="/logo.svg" width={30} height={30} alt="" />
+          <span>
+            {envConfigs.app_name}
+            <small>{m['studio.brand_tag']()}</small>
+          </span>
+        </Link>
+        <nav
+          className={mobileOpen ? 'prism-nav is-open' : 'prism-nav'}
+          aria-label={m['studio.navigation']()}
+        >
+          {navigation.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              aria-current={item.href === '/pricing' ? 'page' : undefined}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+        <div className="prism-header-actions">
+          <button
+            className="language-button"
+            onClick={() => setLocale(getLocale() === 'en' ? 'zh' : 'en')}
+          >
+            {getLocale() === 'en' ? '中文' : 'EN'}
+          </button>
+          <StudioAccount />
+          <button
+            className="mobile-menu"
+            aria-expanded={mobileOpen}
+            aria-label={m['studio.menu']()}
+            onClick={() => setMobileOpen(!mobileOpen)}
+          >
+            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
+      </header>
+      <main>
+        <section className="pricing-hero">
+          <span className="pricing-eyebrow">
+            <Sparkles size={14} />
+            {m['studio.pricing.eyebrow']()}
+          </span>
+          <h1>{m['studio.pricing.heading']()}</h1>
+          <p>{m['studio.pricing.subtitle']()}</p>
+          <div
+            className="pricing-billing"
+            role="group"
+            aria-label={m['studio.pricing.billing']()}
+          >
+            <button
+              type="button"
+              aria-pressed={!yearly}
+              onClick={() => setYearly(false)}
+            >
+              {m['studio.pricing.monthly']()}
+            </button>
+            <button
+              type="button"
+              aria-pressed={yearly}
+              onClick={() => setYearly(true)}
+            >
+              {m['studio.pricing.yearly']()}
+            </button>
+            <span>{m['studio.pricing.saving']()}</span>
+          </div>
+        </section>
+        <section
+          className="pricing-plans-section"
+          id="plans"
+          aria-label={m['studio.pricing.nav']()}
+        >
+          <div className="pricing-preview-note">
+            <span>{m['studio.pricing.preview']()}</span>
+            <p>{m['studio.pricing.notice']()}</p>
+          </div>
+          <div className="pricing-plan-grid">
+            {plans.map((plan) => (
+              <article
+                className={
+                  'pricing-plan' +
+                  (plan.id === 'creator' ? ' is-recommended' : '')
+                }
+                key={plan.id}
+              >
+                {plan.id === 'creator' && (
+                  <span className="pricing-recommended">
+                    <Sparkles size={12} />
+                    {m['studio.pricing.recommended']()}
+                  </span>
+                )}
+                <span className="pricing-plan-icon">
+                  {plan.id === 'creator' ? (
+                    <Layers size={20} />
+                  ) : (
+                    <Sparkles size={20} />
+                  )}
+                </span>
+                <h2>{plan.name}</h2>
+                <p className="pricing-plan-copy">{plan.copy}</p>
+                <div className="pricing-amount">
+                  <span>$</span>
+                  <strong>{plan.price}</strong>
+                  <small>{m['studio.pricing.per_month']()}</small>
+                </div>
+                <p className="pricing-billing-note">
+                  {plan.id === 'free'
+                    ? m['studio.pricing.free_note']()
+                    : yearly
+                      ? m['studio.pricing.annual_total']({
+                          amount: plan.annual,
+                        })
+                      : m['studio.pricing.monthly_note']()}
+                </p>
+                {plan.id === 'free' ? (
+                  <Link className="pricing-plan-cta" href="/prompts">
+                    {m['studio.pricing.free.cta']()}
+                    <ArrowRight size={15} />
+                  </Link>
+                ) : (
+                  <button
+                    className="pricing-plan-cta"
+                    type="button"
+                    onClick={() => setSelected(plan.id)}
+                  >
+                    {m['studio.pricing.paid.cta']()}
+                    <ArrowRight size={15} />
+                  </button>
+                )}
+                <div className="pricing-features">
+                  {plan.credits > 0 && (
+                    <p className="pricing-credit-allowance">
+                      <Sparkles size={15} />
+                      {m['studio.pricing.credits']({ count: plan.credits })}
+                    </p>
+                  )}
+                  {plan.features.map((feature) => (
+                    <p key={feature}>
+                      <Check size={15} />
+                      {feature}
+                    </p>
+                  ))}
+                </div>
+                <p className="pricing-plan-footnote">
+                  {plan.id === 'free'
+                    ? m['studio.pricing.no_card']()
+                    : m['studio.pricing.coming']()}
+                </p>
+              </article>
+            ))}
+          </div>
+          <p className="pricing-no-payment">
+            {m['studio.pricing.no_payment']()}
+          </p>
+        </section>
+        <section className="pricing-comparison">
+          <div className="pricing-section-heading">
+            <span className="eyebrow">
+              {m['studio.pricing.compare.eyebrow']()}
+            </span>
+            <h2>{m['studio.pricing.compare.title']()}</h2>
+            <p>{m['studio.pricing.compare.copy']()}</p>
+          </div>
+          <div className="pricing-table-wrap">
+            <table>
+              <caption className="sr-only">
+                {m['studio.pricing.compare.title']()}
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">{m['studio.pricing.compare.feature']()}</th>
+                  {plans.map((plan) => (
+                    <th key={plan.id} scope="col">
+                      {plan.name}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">{m['studio.pricing.compare.credits']()}</th>
+                  <td>—</td>
+                  <td>300</td>
+                  <td>1,000</td>
+                </tr>
+                {comparison.map((row) => (
+                  <tr key={row.label}>
+                    <th scope="row">{row.label}</th>
+                    {plans.map((plan) => (
+                      <td key={plan.id}>
+                        {row.free ? (
+                          <span className="comparison-check">
+                            <Check size={15} />
+                            <span className="sr-only">
+                              {m['studio.pricing.compare.available']()}
+                            </span>
+                          </span>
+                        ) : plan.id === 'free' ? (
+                          <span aria-label={m['studio.pricing.compare.none']()}>
+                            —
+                          </span>
+                        ) : (
+                          <span className="comparison-planned">
+                            {m['studio.pricing.compare.planned']()}
+                          </span>
+                        )}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <section className="faq-section pricing-faq">
+          <div className="pricing-section-heading">
+            <span className="eyebrow">{m['studio.pricing.faq.eyebrow']()}</span>
+            <h2>{m['studio.pricing.faq.title']()}</h2>
+          </div>
+          <div className="faq-list">
+            {faqs.map((faq, index) => (
+              <details key={faq.q} open={index === 0}>
+                <summary>
+                  {faq.q}
+                  <span aria-hidden="true">+</span>
+                </summary>
+                <p>{faq.a}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+        <section className="pricing-closing">
+          <h2>{m['studio.pricing.closing.title']()}</h2>
+          <p>{m['studio.pricing.closing.copy']()}</p>
+          <Link href="/prompts">
+            {m['studio.pricing.closing.cta']()}
+            <ArrowRight size={16} />
+          </Link>
+        </section>
+      </main>
+      <footer className="prism-footer">
+        <div className="footer-top">
+          <div>
+            <Link className="prism-brand" href="/">
+              <img src="/logo.svg" width={28} height={28} alt="" />
+              <span>{envConfigs.app_name}</span>
+            </Link>
+            <p>{m['studio.footer_tagline']()}</p>
+          </div>
+          <div className="footer-links">
+            {navigation.map((item) => (
+              <Link key={item.href} href={item.href}>
+                {item.label}
+              </Link>
+            ))}
+            <Link href="/privacy-policy">{m['studio.privacy']()}</Link>
+            <Link href="/terms-of-service">{m['studio.terms']()}</Link>
+          </div>
+        </div>
+        <div className="footer-bottom">
+          <span>
+            © {new Date().getFullYear()} {envConfigs.app_name}.{' '}
+            {m['studio.independent']()}
+          </span>
+          <BuiltWithShipAny />
+        </div>
+      </footer>
+      <Dialog
+        open={!!chosen}
+        onOpenChange={(open) => {
+          if (!open) setSelected(null);
+        }}
+      >
+        <DialogContent className="pricing-plan-dialog" showCloseButton={false}>
+          <DialogClose
+            className="studio-login-close"
+            aria-label={m['studio.auth.close']()}
+          >
+            ×
+          </DialogClose>
+          <span className="studio-login-icon">
+            <Sparkles size={22} />
+          </span>
+          <DialogTitle>
+            {m['studio.pricing.dialog.title']({ plan: chosen?.name ?? '' })}
+          </DialogTitle>
+          <DialogDescription>
+            {m['studio.pricing.dialog.copy']()}
+          </DialogDescription>
+          {chosen && (
+            <div className="pricing-dialog-summary">
+              <strong>
+                ${chosen.price}
+                <small>{m['studio.pricing.per_month']()}</small>
+              </strong>
+              <p>
+                {yearly
+                  ? m['studio.pricing.annual_total']({ amount: chosen.annual })
+                  : m['studio.pricing.monthly_note']()}
+              </p>
+              <span>
+                {m['studio.pricing.credits']({ count: chosen.credits })}
+              </span>
+            </div>
+          )}
+          <Link href="/prompts" className="pricing-dialog-link">
+            {m['studio.pricing.dialog.back']()}
+            <ArrowRight size={15} />
+          </Link>
+        </DialogContent>
+      </Dialog>
+    </div>
+  );
+}

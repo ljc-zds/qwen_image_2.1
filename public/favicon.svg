@@ -1,4 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Favicon">
-  <rect width="512" height="512" rx="96" fill="#0a0a0a"/>
-  <text x="50%" y="50%" dy="0.04em" text-anchor="middle" dominant-baseline="central" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-size="360" font-weight="700" fill="#ffffff">S</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="18" fill="#7f00ff"/><path d="M17 45V18h15c10 0 15 5 15 12s-5 12-15 12h-7v3zm8-11h7c5 0 7-1 7-4s-2-4-7-4h-7z" fill="#ffffff"/><circle cx="46" cy="47" r="4" fill="#ffffff"/></svg>

@@ -1,0 +1,306 @@
+{
+  "creator": "Built-in imagegen tool",
+  "purpose": "Illustrative prompt examples, not Qwen Image 2.1 benchmark output",
+  "items": [
+    {
+      "id": "moon-laundromat",
+      "title": "Moonlit laundromat",
+      "zhTitle": "月球洗衣房",
+      "category": "surreal",
+      "prompt": "A pastel laundromat on the surface of the moon, round washing machines glowing like portals, an astronaut folding silver laundry, Earth on the horizon, lavender dust, cinematic surreal 3D art, soft rim light. Square composition, high detail, no lettering, no logo, no watermark.",
+      "zhPrompt": "月球表面的粉彩洗衣房，圆形洗衣机像传送门一样发光，宇航员叠着银色衣物，地平线上可见地球，薰衣草紫月尘，电影感超现实 3D 艺术，柔和轮廓光。 正方形构图，丰富细节，无文字，无标志，无水印。",
+      "transparent": false,
+      "image": "public/imgs/original/moon-laundromat.webp"
+    },
+    {
+      "id": "whale-greenhouse",
+      "title": "A greenhouse on a whale",
+      "zhTitle": "鲸背上的温室",
+      "category": "surreal",
+      "prompt": "A gigantic gentle whale floating through peach clouds with a miniature glass greenhouse and lush plants on its back, delicate brass framework, dreamy sunrise, realistic textures, whimsical cinematic concept art. Square composition, high detail, no lettering, no logo, no watermark.",
+      "zhPrompt": "一只温柔的巨鲸漂浮在蜜桃色云层中，背上有迷你玻璃温室与茂盛植物，精巧黄铜框架，梦幻日出，真实质感，奇幻电影概念艺术。 正方形构图，丰富细节，无文字，无标志，无水印。",
+      "transparent": false,
+      "image": "public/imgs/original/whale-greenhouse.webp"
+    },
+    {
+      "id": "teacup-waterfall",
+      "title": "Waterfall in a teacup",
+      "zhTitle": "茶杯里的瀑布",
+      "category": "surreal",
+      "prompt": "A porcelain teacup containing a miniature mossy mountain and a cascading waterfall, water spilling gracefully onto a stone table, soft forest light, macro photography, magical realism, rich emerald and cream palette. Square composition, high detail, no lettering, no logo, no watermark.",
+      "zhPrompt": "一个瓷茶杯里有微缩苔藓山峰与层叠瀑布，水流优雅地溢到石桌上，柔和森林光，微距摄影，魔幻现实主义，祖母绿与奶油色配色。 正方形构图，丰富细节，无文字，无标志，无水印。",
+      "transparent": false,
+      "image": "public/imgs/original/teacup-waterfall.webp"
+    },
+    {
+      "id": "jellyfish-tram",
+      "title": "The jellyfish night tram",
+      "zhTitle": "水母夜班电车",
+      "category": "surreal",
+      "prompt": "A vintage golden tram suspended beneath an enormous glowing jellyfish, traveling through a deep indigo sky over a tiny coastal town, bioluminescent tendrils, warm windows, cinematic dreamlike illustration. Square composition, high detail, no lettering, no logo, no watermark.",
+      "zhPrompt": "一辆复古金色电车悬挂在巨大发光水母下，穿过深靛蓝夜空，下方是微小海滨城镇，生物荧光触须与温暖车窗，电影感梦境插画。 正方形构图，丰富细节，无文字，无标志，无水印。",
+      "transparent": false,
+      "image": "public/imgs/original/jellyfish-tram.webp"
+    },
+    {
+      "id": "desert-door",
+      "title": "A doorway to the ocean",
+      "zhTitle": "通向海洋的门",
+      "category": "surreal",
+      "prompt": "A freestanding arched cobalt-blue door in a vast pink sand desert, the open doorway revealing a calm turquoise ocean, long afternoon shadows, crisp minimal surreal architecture, editorial photography. Square composition, high detail, no lettering, no logo, no watermark.",
+      "zhPrompt": "辽阔粉色沙漠中一扇独立的钴蓝拱门，打开的门里是平静碧蓝海洋，悠长午后投影，干净极简的超现实建筑，编辑风格摄影。 正方形构图，丰富细节，无文字，无标志，无水印。",
+      "transparent": false,
+      "image": "public/imgs/original/desert-door.webp"
+    },
+    {
+      "id": "sunlit-potter",
+      "title": "The sunlit potter",
+      "zhTitle": "窗光下的陶艺师",
+      "category": "portrait",
+      "prompt": "Candid portrait of an adult woman potter shaping a clay bowl in a rustic studio, linen apron, clay-covered hands, side window sunlight, warm terracotta tones, authentic skin texture, documentary photography. Square composition, high detail, no lettering, no logo, no watermark.",
+      "zhPrompt": "成年女性陶艺师在质朴工作室塑造陶碗，亚麻围裙与沾满陶泥的双手，侧窗阳光，温暖赤陶色，自然肤质，纪实人像摄影。 正方形构图，丰富细节，无文字，无标志，无水印。",
+      "transparent": false,
+      "image": "public/imgs/original/sunlit-potter.webp"
+    },
+    {
+      "id": "rooftop-musician",
+      "title": "Rooftop jazz at dusk",
+      "zhTitle": "屋顶黄昏爵士",
+      "category": "portrait",
+      "prompt": "Portrait of an adult Black male saxophonist on a city rooftop at dusk, elegant cream jacket, blurred warm skyline lights, rich plum sky, cinematic editorial photography, natural skin detail, shallow depth of field. Square composition, high detail, no lettering, no logo, no watermark.",
+      "zhPrompt": "成年黑人男萨克斯手站在黄昏城市屋顶，优雅奶油色夹克，背景暖色天际线散景，深梅紫天空，电影感编辑人像摄影，自然皮肤细节，浅景深。 正方形构图，丰富细节，无文字，无标志，无水印。",
+      "transparent": false,
+      "image": "public/imgs/original/rooftop-musician.webp"
+    },
+    {
+      "id": "mountain-hiker",
+      "title": "A breath of mountain air",
+      "zhTitle": "山间呼吸",
+      "category": "portrait",
+      "prompt": "Environmental portrait of an adult East Asian woman hiker resting beside an alpine lake, rust-orange outdoor jacket, windswept hair, turquoise water and misty peaks, soft overcast daylight, candid travel photography. Square composition, high detail, no lettering, no logo, no watermark.",
+      "zhPrompt": "成年东亚女性徒步者在高山湖旁休息，铁锈橙户外夹克与随风头发，碧蓝湖水和云雾山峰，柔和阴天自然光，抓拍旅行人像。 正方形构图，丰富细节，无文字，无标志，无水印。",
+      "transparent": false,
+      "image": "public/imgs/original/mountain-hiker.webp"
+    },
+    {
+      "id": "bookshop-reader",
+      "title": "Quiet bookshop morning",
+      "zhTitle": "书店的安静清晨",
+      "category": "portrait",
+      "prompt": "An older adult man with silver hair reading by the window of a cozy independent bookshop, forest-green cardigan, dusty sunlight, wooden shelves, warm intimate portrait, subtle film grain. Square composition, high detail, no lettering, no logo, no watermark.",
+      "zhPrompt": "银发老年男性在温馨独立书店窗边阅读，森林绿开衫，带尘埃的阳光与木书架，温暖亲密的人像，细微胶片颗粒。 正方形构图，丰富细节，无文字，无标志，无水印。",
+      "transparent": false,
+      "image": "public/imgs/original/bookshop-reader.webp"
+    },
+    {
+      "id": "botanical-fashion",
+      "title": "Botanical fashion editorial",
+      "zhTitle": "植物温室时装",
+      "category": "portrait",
+      "prompt": "Fashion portrait of an adult woman with deep brown skin in a sculptural lilac dress inside a lush botanical greenhouse, dappled sunlight, soft green foliage, elegant confident pose, premium editorial photography. Square composition, high detail, no lettering, no logo, no watermark.",
+      "zhPrompt": "深棕肤色成年女性身着雕塑感淡紫裙装站在茂盛植物温室，斑驳阳光，柔绿植物背景，优雅自信姿态，高级编辑时尚摄影。 正方形构图，丰富细节，无文字，无标志，无水印。",
+      "transparent": false,
+      "image": "public/imgs/original/botanical-fashion.webp"
+    },
+    {
+      "id": "citrus-tart",
+      "title": "Sunshine citrus tart",
+      "zhTitle": "阳光柑橘塔",
+      "category": "food",
+      "prompt": "Premium food photograph of a glossy citrus tart with overlapping blood-orange slices on a cream ceramic plate, linen tablecloth, fresh leaves, bright side sunlight, warm Mediterranean palette, crisp edible textures. Square composition, high detail, no lettering, no logo, no watermark.",
+      "zhPrompt": "高级美食摄影，光泽柑橘塔上叠放血橙片，奶油色陶瓷盘与亚麻桌布，新鲜叶片，明亮侧光，温暖地中海配色，清晰真实食物纹理。 正方形构图，丰富细节，无文字，无标志，无水印。",
+      "transparent": false,
+      "image": "public/imgs/original/citrus-tart.webp"
+    },
+    {
+      "id": "galaxy-donut",
+      "title": "A little galaxy donut",
+      "zhTitle": "银河甜甜圈",
+      "category": "food",
+      "prompt": "Macro food photography of a single artisan donut with glossy violet galaxy icing, tiny silver sugar stars and blue swirls, pale lilac background, clean studio light, playful luxurious presentation. Square composition, high detail, no lettering, no logo, no watermark.",
+      "zhPrompt": "单个手工甜甜圈微距美食摄影，亮紫色银河糖霜，小银糖星与蓝色漩涡，淡紫背景，干净棚拍光，俏皮精致呈现。 正方形构图，丰富细节，无文字，无标志，无水印。",
+      "transparent": false,
+      "image": "public/imgs/original/galaxy-donut.webp"
+    },
+    {
+      "id": "pistachio-croissant",
+      "title": "Pistachio morning",
+      "zhTitle": "开心果可颂清晨",
+      "category": "food",
+      "prompt": "A flaky pistachio cream croissant cut open on a pale stone board, crushed pistachios and a small espresso cup, gentle morning light, sage green backdrop, realistic food editorial, delicate crumbs. Square composition, high detail, no lettering, no logo, no watermark.",
+      "zhPrompt": "切开的酥皮开心果奶油可颂放在浅色石板上，开心果碎与小浓缩咖啡杯，柔和晨光，鼠尾草绿背景，真实编辑美食摄影，细腻碎屑。 正方形构图，丰富细节，无文字，无标志，无水印。",
+      "transparent": false,
+      "image": "public/imgs/original/pistachio-croissant.webp"
+    },
+    {
+      "id": "peach-soda",
+      "title": "Peach soda sparkle",
+      "zhTitle": "蜜桃气泡时刻",
+      "category": "food",
+      "prompt": "A chilled clear glass of peach soda with ice cubes, fresh peach slices, mint and sparkling bubbles, condensation droplets, coral gradient backdrop, backlit summer beverage photography. Square composition, high detail, no lettering, no logo, no watermark.",
+      "zhPrompt": "冰镇透明玻璃杯装蜜桃汽水，冰块、鲜桃片、薄荷与闪亮气泡，杯壁凝水，珊瑚渐变背景，逆光夏日饮品摄影。 正方形构图，丰富细节，无文字，无标志，无水印。",
+      "transparent": false,
+      "image": "public/imgs/original/peach-soda.webp"
+    },
+    {
+      "id": "sushi-garden",
+      "title": "A miniature sushi garden",
+      "zhTitle": "寿司微缩花园",
+      "category": "food",
+      "prompt": "A beautifully plated assortment of sushi arranged like a miniature Japanese garden, edible moss-like herbs, tiny cucumber bridges and stone-like sesame rice, natural ceramic platter, soft window light, overhead food photography. Square composition, high detail, no lettering, no logo, no watermark.",
+      "zhPrompt": "寿司拼盘布置成微缩日式花园，可食用苔藓般香草、黄瓜小桥与石头般芝麻米饭，自然陶瓷盘，柔和窗光，俯拍美食摄影。 正方形构图，丰富细节，无文字，无标志，无水印。",
+      "transparent": false,
+      "image": "public/imgs/original/sushi-garden.webp"
+    },
+    {
+      "id": "amber-skincare",
+      "title": "Amber skincare ritual",
+      "zhTitle": "琥珀护肤仪式",
+      "category": "product",
+      "prompt": "An unbranded amber glass skincare bottle on a travertine pedestal with a folded cream towel and a small olive branch, warm side sunlight, elegant beige background, premium realistic product photography. Square composition, high detail, no lettering, no logo, no watermark.",
+      "zhPrompt": "无品牌琥珀玻璃护肤瓶放在洞石台座上，折叠奶油色毛巾与小橄榄枝，暖侧向阳光，优雅米色背景，高级真实产品摄影。 正方形构图，丰富细节，无文字，无标志，无水印。",
+      "transparent": false,
+      "image": "public/imgs/original/amber-skincare.webp"
+    },
+    {
+      "id": "mint-headphones",
+      "title": "Mint sound sculpture",
+      "zhTitle": "薄荷耳机雕塑",
+      "category": "product",
+      "prompt": "Unbranded mint-green over-ear headphones floating above a curved pale mint podium, matte materials, soft gradient background, balanced studio shadows, sculptural modern product render. Square composition, high detail, no lettering, no logo, no watermark.",
+      "zhPrompt": "无品牌薄荷绿头戴耳机悬浮在弧形淡绿展示台上，哑光材质，柔和渐变背景，均衡棚拍阴影，雕塑感现代产品渲染。 正方形构图，丰富细节，无文字，无标志，无水印。",
+      "transparent": false,
+      "image": "public/imgs/original/mint-headphones.webp"
+    },
+    {
+      "id": "opal-watch",
+      "title": "Opal timepiece",
+      "zhTitle": "欧泊光泽腕表",
+      "category": "product",
+      "prompt": "An unbranded minimal silver wristwatch with an opalescent dial and pale leather strap, resting on folded lavender fabric, glancing light, crisp metallic details, luxury product macro photography. Square composition, high detail, no lettering, no logo, no watermark.",
+      "zhPrompt": "无品牌极简银色腕表，欧泊光泽表盘与浅色皮带，放在折叠薰衣草紫布料上，斜掠光线，清晰金属细节，奢华产品微距摄影。 正方形构图，丰富细节，无文字，无标志，无水印。",
+      "transparent": false,
+      "image": "public/imgs/original/opal-watch.webp"
+    },
+    {
+      "id": "ceramic-lamp",
+      "title": "A warm ceramic glow",
+      "zhTitle": "陶瓷灯的暖光",
+      "category": "product",
+      "prompt": "A sculptural unbranded cream ceramic table lamp shaped like a smooth mushroom, softly glowing on a walnut side table, lilac wall and evening shadows, warm interior product photography. Square composition, high detail, no lettering, no logo, no watermark.",
+      "zhPrompt": "雕塑感无品牌奶油陶瓷桌灯，光滑蘑菇造型，在胡桃木边桌上柔和发光，淡紫墙面与傍晚投影，温暖室内产品摄影。 正方形构图，丰富细节，无文字，无标志，无水印。",
+      "transparent": false,
+      "image": "public/imgs/original/ceramic-lamp.webp"
+    },
+    {
+      "id": "violet-sneaker",
+      "title": "Violet motion",
+      "zhTitle": "紫色跃动",
+      "category": "product",
+      "prompt": "An unbranded lavender running shoe with peach accents suspended over a pale peach geometric platform, airy composition, textile mesh and rubber texture, directional studio light, sporty premium product photography. Square composition, high detail, no lettering, no logo, no watermark.",
+      "zhPrompt": "无品牌薰衣草紫跑鞋搭配蜜桃色细节，悬浮在浅桃色几何台座上，轻盈构图，织物网面与橡胶纹理，定向棚拍光，高级运动产品摄影。 正方形构图，丰富细节，无文字，无标志，无水印。",
+      "transparent": false,
+      "image": "public/imgs/original/violet-sneaker.webp"
+    },
+    {
+      "id": "panda-bakery",
+      "title": "The panda’s little bakery",
+      "zhTitle": "熊猫的小烘焙店",
+      "category": "illustration",
+      "prompt": "A cozy storybook illustration of a cheerful panda baker kneading dough in a tiny woodland bakery, flour dust, warm oven glow, croissants on shelves, pastel gouache textures, charming detailed composition. Square composition, high detail, no lettering, no logo, no watermark.",
+      "zhPrompt": "温馨童话插画，一只开心熊猫面包师在森林小烘焙店揉面，飘扬面粉，暖炉光，架上可颂，粉彩水粉纹理，精巧迷人构图。 正方形构图，丰富细节，无文字，无标志，无水印。",
+      "transparent": false,
+      "image": "public/imgs/original/panda-bakery.webp"
+    },
+    {
+      "id": "rabbit-moon-garden",
+      "title": "The rabbit moon gardener",
+      "zhTitle": "月亮兔子园丁",
+      "category": "illustration",
+      "prompt": "A white rabbit tending luminous flowers in a garden on a crescent moon, little watering can, deep blue starry sky, pastel pink blossoms, delicate watercolor storybook art, gentle magical atmosphere. Square composition, high detail, no lettering, no logo, no watermark.",
+      "zhPrompt": "白兔在弯月花园照料发光花朵，小浇水壶，深蓝星空，粉色花朵，细腻水彩童话艺术，轻柔奇幻氛围。 正方形构图，丰富细节，无文字，无标志，无水印。",
+      "transparent": false,
+      "image": "public/imgs/original/rabbit-moon-garden.webp"
+    },
+    {
+      "id": "capybara-spa",
+      "title": "Capybara hot-spring day",
+      "zhTitle": "水豚温泉日",
+      "category": "illustration",
+      "prompt": "A peaceful capybara soaking in a tiny forest hot spring with yuzu fruit, steam, bamboo and smooth stones, cozy hand-painted gouache illustration, muted sage and ochre palette, whimsical details. Square composition, high detail, no lettering, no logo, no watermark.",
+      "zhPrompt": "安静水豚泡在森林小温泉，柚子果、蒸汽、竹子与光滑石头，温馨手绘水粉插画，低饱和鼠尾草绿与赭色，趣味细节。 正方形构图，丰富细节，无文字，无标志，无水印。",
+      "transparent": false,
+      "image": "public/imgs/original/capybara-spa.webp"
+    },
+    {
+      "id": "turtle-airship",
+      "title": "The traveling turtle airship",
+      "zhTitle": "旅行乌龟飞艇",
+      "category": "illustration",
+      "prompt": "A friendly turtle flying beneath a patchwork hot-air balloon with tiny luggage and a map, rolling emerald hills below, golden sunset, textured children’s book illustration, delightful whimsical scene. Square composition, high detail, no lettering, no logo, no watermark.",
+      "zhPrompt": "友善乌龟乘拼布热气球飞行，带着小行李与地图，下方起伏翠绿山丘，金色日落，有纹理儿童绘本插画，愉悦奇幻场景。 正方形构图，丰富细节，无文字，无标志，无水印。",
+      "transparent": false,
+      "image": "public/imgs/original/turtle-airship.webp"
+    },
+    {
+      "id": "bear-stargazer",
+      "title": "The bear who counted stars",
+      "zhTitle": "数星星的小熊",
+      "category": "illustration",
+      "prompt": "A small brown bear with a telescope on the roof of a forest cottage, oversized starry sky, glowing lanterns, tiny pine trees, midnight blue and warm gold, tender textured storybook illustration. Square composition, high detail, no lettering, no logo, no watermark.",
+      "zhPrompt": "小棕熊在森林木屋屋顶使用望远镜，辽阔星空，发光灯笼，小松树，午夜蓝与暖金色，温柔细腻纹理童话插画。 正方形构图，丰富细节，无文字，无标志，无水印。",
+      "transparent": false,
+      "image": "public/imgs/original/bear-stargazer.webp"
+    },
+    {
+      "id": "red-panda-boba",
+      "title": "Boba red panda sticker",
+      "zhTitle": "奶茶小熊猫贴纸",
+      "category": "sticker",
+      "prompt": "A cute red panda holding a cup of bubble tea, glossy soft 3D clay toy style, cinnamon fur, mint jacket, crisp white die-cut outline, full body centered, genuinely transparent background with alpha, isolated sticker. Square composition, high detail, no lettering, no logo, no watermark.",
+      "zhPrompt": "可爱小熊猫抱着珍珠奶茶，柔亮 3D 黏土玩具风格，肉桂色毛发，薄荷夹克，清晰白色模切外边，全身居中，带 alpha 通道的真实透明背景，独立贴纸。 正方形构图，丰富细节，无文字，无标志，无水印。",
+      "transparent": true,
+      "image": "public/imgs/original/red-panda-boba.webp"
+    },
+    {
+      "id": "duck-raincoat",
+      "title": "Raincoat duck sticker",
+      "zhTitle": "雨衣鸭鸭贴纸",
+      "category": "sticker",
+      "prompt": "A cheerful yellow duck in a lavender raincoat holding a tiny umbrella, glossy soft 3D clay toy style, peach boots, crisp white die-cut outline, full body centered, genuinely transparent background with alpha, isolated sticker. Square composition, high detail, no lettering, no logo, no watermark.",
+      "zhPrompt": "开心黄鸭穿薰衣草紫雨衣，手持小伞，柔亮 3D 黏土玩具风格，蜜桃靴子，清晰白色模切外边，全身居中，带 alpha 通道的真实透明背景，独立贴纸。 正方形构图，丰富细节，无文字，无标志，无水印。",
+      "transparent": true,
+      "image": "public/imgs/original/duck-raincoat.webp"
+    },
+    {
+      "id": "corgi-chef",
+      "title": "Little corgi chef sticker",
+      "zhTitle": "柯基小厨师贴纸",
+      "category": "sticker",
+      "prompt": "A smiling corgi chef wearing a cream chef hat and holding a tiny strawberry cake, glossy soft 3D clay toy style, apricot fur, crisp white die-cut outline, full body centered, genuinely transparent background with alpha, isolated sticker. Square composition, high detail, no lettering, no logo, no watermark.",
+      "zhPrompt": "微笑柯基厨师戴奶油色厨师帽，捧着小草莓蛋糕，柔亮 3D 黏土玩具风格，杏色毛发，清晰白色模切外边，全身居中，带 alpha 通道的真实透明背景，独立贴纸。 正方形构图，丰富细节，无文字，无标志，无水印。",
+      "transparent": true,
+      "image": "public/imgs/original/corgi-chef.webp"
+    },
+    {
+      "id": "penguin-skater",
+      "title": "Penguin skater sticker",
+      "zhTitle": "滑板企鹅贴纸",
+      "category": "sticker",
+      "prompt": "A playful penguin on a mint skateboard wearing peach headphones, glossy soft 3D clay toy style, round expressive eyes, crisp white die-cut outline, full body centered, genuinely transparent background with alpha, isolated sticker. Square composition, high detail, no lettering, no logo, no watermark.",
+      "zhPrompt": "俏皮企鹅踏薄荷滑板，戴蜜桃耳机，柔亮 3D 黏土玩具风格，圆润有神眼睛，清晰白色模切外边，全身居中，带 alpha 通道的真实透明背景，独立贴纸。 正方形构图，丰富细节，无文字，无标志，无水印。",
+      "transparent": true,
+      "image": "public/imgs/original/penguin-skater.webp"
+    },
+    {
+      "id": "frog-camera",
+      "title": "Travel photographer frog sticker",
+      "zhTitle": "旅行摄影青蛙贴纸",
+      "category": "sticker",
+      "prompt": "A cute sage-green frog holding a tiny vintage camera and wearing a lavender backpack, glossy soft 3D clay toy style, friendly smile, crisp white die-cut outline, full body centered, genuinely transparent background with alpha, isolated sticker. Square composition, high detail, no lettering, no logo, no watermark.",
+      "zhPrompt": "可爱鼠尾草绿青蛙拿复古小相机，背薰衣草紫背包，柔亮 3D 黏土玩具风格，友善笑容，清晰白色模切外边，全身居中，带 alpha 通道的真实透明背景，独立贴纸。 正方形构图，丰富细节，无文字，无标志，无水印。",
+      "transparent": true,
+      "image": "public/imgs/original/frog-camera.webp"
+    }
+  ]
+}

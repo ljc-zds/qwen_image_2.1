@@ -16,8 +16,10 @@ const publicEnv = (key: string) => metaEnv[key] ?? procEnv[key];
 export const envConfigs: Record<string, string> = {
   // App (public)
   app_url: publicEnv('VITE_APP_URL') ?? 'http://localhost:3000',
-  app_name: publicEnv('VITE_APP_NAME') ?? 'ShipAny',
-  app_description: publicEnv('VITE_APP_DESCRIPTION') ?? 'Ship your SaaS faster',
+  app_name: publicEnv('VITE_APP_NAME') ?? 'Prism Studio',
+  app_description:
+    publicEnv('VITE_APP_DESCRIPTION') ??
+    'Create images, edit photos and design transparent PNGs with Qwen Image 2.1',
   app_logo: publicEnv('VITE_APP_LOGO') ?? '/logo.svg',
 
   // Database
@@ -71,6 +73,12 @@ export const envConfigs: Record<string, string> = {
   storage_bucket: procEnv.STORAGE_BUCKET ?? '',
   storage_public_domain: procEnv.STORAGE_PUBLIC_DOMAIN ?? '',
   inline_image_max_kb: procEnv.INLINE_IMAGE_MAX_KB ?? '2048',
+
+  // Studio inference bridge (server-only)
+  studio_image_endpoint: procEnv.STUDIO_IMAGE_ENDPOINT ?? '',
+  studio_image_api_key: procEnv.STUDIO_IMAGE_API_KEY ?? '',
+  studio_image_provider: procEnv.STUDIO_IMAGE_PROVIDER ?? 'bridge',
+  studio_image_model: procEnv.STUDIO_IMAGE_MODEL ?? 'qwen-image-2.1-pro',
 
   // AI
   // OpenAI / Anthropic are admin-panel-only (like Gemini/Fal). No env fallback:

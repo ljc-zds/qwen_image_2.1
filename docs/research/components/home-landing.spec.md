@@ -1,0 +1,17 @@
+# Prism product homepage
+
+Reference: https://imageprompt.org/; screenshots docs/design-references/imageprompt-home-top.png and imageprompt-home-full.png. Captured style JSON docs/research/home-reference.json.
+Own brand/content/original artwork must remain. Do not copy competitor claims or testimonials.
+Target ONLY src/styles/home.css. Shared root edits TSX/messages/routes separately.
+Root component classes:
+.prism-site.home-page wraps whole page; existing studio.css supplies white purple tokens and header/footer/nav/mobile rules. HomeLanding imports home.css after studio.css.
+Header .prism-header .prism-brand .prism-nav .prism-header-actions .language-button .signin-link .mobile-menu as current. Nav Home / #inspiration / #tools / /prompts. Sticky header.
+Main .home-hero contains h1 (line break plus span purple Qwen Image 2.1), .home-subtitle, .home-actions .home-primary and .home-secondary Links, .home-tool-grid of four .home-tool-card Links with .tool-icon SVG + h2 + p, .home-related containing two inline Links. Hero pale lavender gradient white to #faf5ff; bottom border.
+Reference exact hero H1 font ~72 bold on desktop, 1 line 72, maxwidth1000 centered, 4 cards white/#f8fafc, radius4, padding24, icons purple28px, h2 18/28, p14/21 muted. Hero buttons purple filled and purple bordered radius4 height40. Hero bottom around y800 without competitor ad banner, enough whitespace. Header80.
+.home-section .home-tools#tools contains .home-section-heading h2 48/48 bold + p18 muted, .home-feature-list of four .home-feature rows, each .feature-visual(.visual-generate|.visual-edit|.visual-transparent|.visual-prompts) with img + .visual-note(strong,p) + span.visual-symbol arrow; .feature-copy(h3,p,Link .home-primary). Rows display2cols, maxwidth1216, gap64, minheight320, alternate image left/right using even order. Visual lavender backgroundradius12;height300; image ~200sq positioned left/top, note white float right/bottom width210 radius6 shadow or editorial tilt; transparent pic object-fitcontain with own alpha; preserve statement "creative illustration". All assets are already own originals.
+.home-section.home-inspiration#inspiration .home-section-heading + .home-gallery of four .gallery-card links: img + span.gallery-label. CSS gallery3 or4 columns desktop, 2 tablet,1 mobile; images rounded4 square/portrait exact aspectratio and no stretched images. .gallery-sticker image object-fitcontain lavender checkerboard optional.
+.home-section.home-usecases contains heading and .home-usecase-grid 3 .home-usecase cards with svg,h3,p. These are USE CASES not reviews; no ratings fabricated.
+.faq-section.home-faq with existing FAQ CSS from studio (h2 center, list max850) remains. .home-closing with h2+p+primary button pale lavender callout.
+Footer same classes existing .prism-footer .footer-top .footer-links .footer-bottom; no override unless needed.
+At1440 max1216 margin112; at768 padding24 four toolcards become2x2, alternatingfeatures stack or2cols; at390 padding16, H1 38/42, tools2cols or1 based readable, features stack all visual first, maxnooverflow. Gal3pics can be4columns onlydesktop enough; hidden originalmenu retains existingcss breakpoint620. A route link is actualfunctional. Reducedmotion transitions none; normalhover200ms color/shadow/translateY -3. No page animations necessary.
+Do not touch other files or build. Format CSS and report ready for screenshots.

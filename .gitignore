@@ -65,3 +65,13 @@ package-lock.json
 
 # Runtime image uploads (no-storage local fallback)
 /public/uploads/
+
+# Local build diagnostics and visual verification
+.local/
+*.log
+*.tsbuildinfo
+
+# Generated design-reference captures and downloadable export bundles
+/docs/design-references/
+/docs/research/*.json
+/assets/prompt-library/*.zip

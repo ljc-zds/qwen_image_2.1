@@ -1,0 +1,185 @@
+.studio-signin {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #7f00ff;
+  background: none;
+  border: 0;
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.studio-account-loading {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #f5f0fc;
+}
+.studio-login-dialog {
+  width: calc(100% - 32px) !important;
+  max-width: 400px !important;
+  padding: 32px !important;
+  border-radius: 20px !important;
+  gap: 14px !important;
+  background: #fff !important;
+  color: #141222 !important;
+  font-family: 'DM Sans', sans-serif;
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
+}
+.studio-login-close {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  font-size: 25px;
+  color: #a69aaf;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+.studio-login-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: #f2e8ff;
+  color: #7f00ff;
+  border-radius: 14px;
+  margin: 0 auto 3px;
+}
+.studio-login-title {
+  text-align: center;
+  font-size: 25px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.7px;
+  line-height: 1.25 !important;
+}
+.studio-login-description {
+  text-align: center;
+  font-size: 13px !important;
+  line-height: 1.8;
+  color: #8b8197 !important;
+}
+.studio-login-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 15px;
+  font-size: 12px;
+  color: #6f627c;
+  font-weight: 500;
+}
+.studio-login-field input {
+  height: 44px;
+  border: 1px solid #e6deef;
+  border-radius: 8px;
+  background: #fdfbff;
+  padding: 10px 12px;
+  font-size: 14px;
+  color: #1b1624;
+  outline: none;
+}
+.studio-login-field input:focus {
+  border-color: #b77ded;
+  box-shadow: 0 0 0 3px #7f00ff0b;
+}
+.studio-login-submit,
+.studio-google-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  width: 100%;
+  min-height: 45px;
+  border-radius: 9px;
+  border: 1px solid #e5daef;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.studio-login-submit {
+  background: linear-gradient(110deg, #8b2cf4, #7108e9);
+  border: 0;
+  color: #fff;
+}
+.studio-google-button {
+  background: white;
+  color: #51475d;
+}
+.studio-google-button > span {
+  font-size: 18px;
+  font-weight: 700;
+  color: #4285f4;
+}
+.studio-login-submit:disabled,
+.studio-google-button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+.studio-login-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #aaa0b4;
+  font-size: 11px;
+}
+.studio-login-divider:before,
+.studio-login-divider:after {
+  content: '';
+  height: 1px;
+  background: #eee8f4;
+  flex: 1;
+}
+.studio-login-register {
+  font-size: 12px;
+  color: #9a8aa7;
+  text-align: center;
+  margin: 16px 0 0;
+}
+.studio-login-register button,
+.studio-login-forgot {
+  background: none;
+  border: 0;
+  color: #7f00ff;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 0;
+}
+.studio-login-forgot {
+  display: block;
+  margin: -4px 0 15px auto;
+}
+.studio-login-footnote,
+.studio-login-loading {
+  text-align: center;
+  font-size: 11px;
+  color: #aa9eb4;
+  margin: 0;
+  line-height: 1.7;
+}
+.studio-login-error {
+  background: #fff2f4;
+  border: 1px solid #f8dce2;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 12px;
+  color: #b7435a;
+  line-height: 1.6;
+}
+.studio-account {
+  display: flex;
+  align-items: center;
+}
+@media (max-width: 480px) {
+  .studio-login-dialog {
+    padding: 28px 24px !important;
+  }
+  .studio-signin {
+    font-size: 12px;
+    gap: 5px;
+  }
+  .studio-signin svg {
+    display: none;
+  }
+}

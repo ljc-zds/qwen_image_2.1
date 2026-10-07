@@ -48,6 +48,12 @@ function isEmailSendingConfigured(configs: Record<string, string>): boolean {
 async function GET({ request }: { request: Request }) {
   const configs = await getAllConfigs();
   const result = filterPublicConfigs(configs, publicKeys);
+  result.google_auth_enabled =
+    configs.google_auth_enabled === 'true' &&
+    !!configs.google_client_id &&
+    !!configs.google_client_secret
+      ? 'true'
+      : 'false';
   const emailConfigured = isEmailSendingConfigured(configs);
   result.password_reset_enabled =
     configs.email_auth_enabled !== 'false' && emailConfigured

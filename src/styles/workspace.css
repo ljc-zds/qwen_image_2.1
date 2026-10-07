@@ -1,0 +1,459 @@
+.tool-page .prism-hero {
+  padding: 22px 20px 28px;
+}
+.tool-page .prism-hero h1 {
+  font-size: 40px;
+  line-height: 1.15;
+  letter-spacing: -1.5px;
+  margin-bottom: 12px;
+}
+.tool-page .prism-hero > p {
+  font-size: 15px;
+  max-width: 660px;
+}
+.tool-page .hero-benefits {
+  margin-top: 14px;
+  font-size: 12px;
+  gap: 20px;
+}
+.tool-page .prism-workspace {
+  max-width: 1160px;
+  border: 1px solid #e7e3ef;
+  border-radius: 20px;
+  background: linear-gradient(145deg, #fbfaff, #f7f9fc);
+  overflow: hidden;
+  box-shadow: 0 12px 40px -28px #542b842b;
+}
+.tool-page .mode-tabs {
+  background: transparent;
+  border: 0;
+  gap: 5px;
+  padding: 18px 24px 0;
+}
+.tool-page .mode-tabs button {
+  padding: 10px 18px;
+  font-size: 13px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  gap: 7px;
+  font-weight: 500;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    box-shadow 0.2s;
+}
+.tool-page .mode-tabs button.active {
+  background: white;
+  border-color: #e5dafb;
+  color: #6e22df;
+  box-shadow: 0 2px 5px #6e22df0c;
+  font-weight: 600;
+}
+.tool-page .mode-tabs button:hover {
+  background: #f3edff;
+}
+.tool-page .mode-tabs button svg {
+  width: 15px;
+  height: 15px;
+}
+.tool-page .workspace-toolbar {
+  min-height: 48px;
+  padding: 14px 26px;
+  font-size: 11px;
+}
+.tool-page .model-pill {
+  border-radius: 20px;
+  font-size: 11px;
+  padding: 5px 10px;
+  border-color: #e9dffc;
+}
+.tool-page .workspace-grid {
+  grid-template-columns: minmax(0, 440px) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+  padding: 0 24px 24px;
+}
+.tool-page .creation-panel {
+  background: white;
+  border: 1px solid #e8e5ee;
+  border-radius: 14px;
+  box-shadow: 0 4px 14px #3f216308;
+  padding: 24px;
+  align-self: start;
+}
+.tool-page .prompt-field label {
+  font-size: 13px;
+  margin-bottom: 10px;
+  gap: 8px;
+}
+.tool-page .prompt-field label span {
+  font-size: 10px;
+  color: #a3a0ad;
+}
+.tool-page .prompt-field textarea {
+  min-height: 170px;
+  max-height: 290px;
+  border: 1px solid #e6e2ee;
+  border-bottom: 0;
+  border-radius: 10px 10px 0 0;
+  background: #fcfbfe;
+  font-size: 13px;
+  line-height: 1.8;
+  padding: 14px;
+  resize: vertical;
+}
+.tool-page .prompt-field textarea::placeholder {
+  color: #aaa4b7;
+}
+.tool-page .prompt-field textarea:focus {
+  outline: none;
+  border-color: #bfa1f1;
+  box-shadow: 0 0 0 3px #7f00ff0a;
+}
+.tool-page .prompt-bottom {
+  border-color: #e6e2ee;
+  border-radius: 0 0 10px 10px;
+  background: #fcfbfe;
+  padding: 10px 12px;
+  font-size: 10px;
+}
+.tool-page .prompt-bottom button {
+  font-size: 10px;
+  color: #8a63b8;
+}
+.tool-page .prompt-bottom small {
+  font-size: 10px;
+  color: #aaa4b7;
+}
+.quick-ideas {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 13px 0 22px;
+}
+.quick-ideas > span {
+  width: 100%;
+  font-size: 10px;
+  color: #aaa4b7;
+  margin-bottom: 2px;
+}
+.quick-ideas button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f8f5fc;
+  border: 1px solid #eee8f5;
+  border-radius: 6px;
+  font-size: 10px;
+  color: #746284;
+  padding: 5px 9px;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
+}
+.quick-ideas button:hover {
+  background: #f0e7ff;
+  border-color: #d9c4fa;
+  color: #6e22df;
+}
+.quick-ideas button span {
+  color: #b29acb;
+}
+.tool-page .settings-row {
+  display: block;
+  margin: 0 0 22px;
+}
+.ratio-setting {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+.ratio-setting legend {
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 9px;
+  float: none;
+  width: auto;
+}
+.ratio-options {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+}
+.ratio-options button {
+  height: 60px;
+  border: 1px solid #e9e5ef;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  background: white;
+  color: #8d8797;
+  font-size: 10px;
+  transition:
+    border-color 0.2s,
+    background 0.2s,
+    color 0.2s;
+}
+.ratio-options button.selected {
+  background: #f7f1ff;
+  border-color: #b88de9;
+  color: #7435bb;
+  box-shadow: 0 0 0 1px #b88de914;
+}
+.ratio-options button:hover {
+  border-color: #c7ace8;
+  background: #faf6ff;
+}
+.ratio-preview {
+  display: block;
+  border: 1.3px solid currentColor;
+  border-radius: 2px;
+  width: 16px;
+  height: 16px;
+}
+.ratio-16-9 {
+  width: 23px;
+  height: 13px;
+}
+.ratio-9-16 {
+  width: 13px;
+  height: 23px;
+}
+.ratio-4-3 {
+  width: 20px;
+  height: 15px;
+}
+.ratio-3-4 {
+  width: 15px;
+  height: 20px;
+}
+.tool-page .output-setting {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid #f1eef5;
+  font-size: 11px;
+  color: #9a92a5;
+}
+.tool-page .format-pill {
+  display: inline-flex;
+  height: auto;
+  padding: 4px 8px;
+  gap: 7px;
+  border: none;
+  border-radius: 5px;
+  background: #f5f6f9;
+  font-size: 10px;
+  color: #737380;
+}
+.tool-page .format-pill svg {
+  color: #8d829e;
+}
+.tool-page .generate-button {
+  border-radius: 9px;
+  min-height: 46px;
+  font-size: 13px;
+  font-weight: 600;
+  background: linear-gradient(110deg, #8b2cf4, #7108e9);
+  border-color: transparent;
+  box-shadow: 0 5px 13px #7f00ff1b;
+  gap: 8px;
+}
+.tool-page .generate-button:hover {
+  background: linear-gradient(110deg, #7b23dd, #6200d4);
+  box-shadow: 0 7px 18px #7f00ff25;
+}
+.tool-page .generate-button svg {
+  width: 15px;
+  height: 15px;
+}
+.tool-page .service-note {
+  font-size: 10px;
+  line-height: 1.6;
+  margin-top: 12px;
+  text-align: center;
+  align-items: baseline;
+  color: #a298af;
+}
+.tool-page .service-note .status-dot {
+  width: 5px;
+  height: 5px;
+}
+.tool-page .preview-panel {
+  background: transparent;
+  border: none;
+  min-height: 0;
+  padding: 10px 34px 12px !important;
+  gap: 18px !important;
+}
+.tool-page .preview-heading {
+  font-size: 10px;
+  padding: 5px 11px;
+  border-color: #e4d7f6;
+  background: #ffffffb3;
+  color: #a07cbd;
+}
+.tool-page .showcase-carousel {
+  max-width: 340px;
+}
+.tool-page .preview-stack {
+  height: 480px;
+}
+.tool-page .preview-stack .showcase-slide {
+  padding: 14px 16px;
+  border-color: #e9e4f1;
+}
+.tool-page .preview-stack .preview-top {
+  margin: -14px -16px 16px;
+  height: 30px;
+  font-size: 9px;
+}
+.tool-page .showcase-prompt {
+  margin-top: 12px;
+}
+.tool-page .showcase-prompt p {
+  font-size: 12px;
+  line-height: 1.65;
+}
+.tool-page .carousel-dots {
+  margin-top: 20px;
+}
+.tool-page .preview-stack .sample-disclaimer {
+  font-size: 8px;
+}
+.tool-page .alpha-note {
+  font-size: 10px;
+}
+.tool-page .upload-zone {
+  border-radius: 10px;
+  min-height: 110px;
+  background: #fcfaff;
+}
+.tool-page .reference-preview {
+  border-radius: 9px;
+}
+@media (max-width: 1000px) {
+  .tool-page .workspace-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    padding: 0 18px 18px;
+  }
+  .tool-page .creation-panel {
+    padding: 18px;
+  }
+  .tool-page .preview-panel {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+  .tool-page .preview-stack {
+    height: 430px;
+  }
+  .tool-page .prism-workspace {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  .quick-ideas button {
+    padding: 5px 7px;
+  }
+  .tool-page .showcase-prompt p {
+    font-size: 11px;
+  }
+}
+@media (max-width: 800px) {
+  .tool-page .workspace-grid {
+    grid-template-columns: 1fr;
+  }
+  .tool-page .creation-panel {
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+  .tool-page .preview-panel {
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 14px 38px !important;
+  }
+  .tool-page .preview-stack {
+    height: 480px;
+  }
+  .tool-page .prism-hero h1 {
+    font-size: 34px;
+  }
+  .tool-page .mode-tabs {
+    justify-content: center;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .tool-page .workspace-toolbar {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+@media (max-width: 480px) {
+  .tool-page .prism-workspace {
+    margin-left: 12px;
+    margin-right: 12px;
+    border-radius: 15px;
+  }
+  .tool-page .workspace-grid {
+    padding: 0 12px 16px;
+    gap: 22px;
+  }
+  .tool-page .creation-panel {
+    padding: 17px;
+    border-radius: 11px;
+  }
+  .tool-page .prism-hero {
+    padding: 18px 18px 24px;
+  }
+  .tool-page .prism-hero h1 {
+    font-size: 29px;
+    line-height: 1.15;
+  }
+  .tool-page .prism-hero > p {
+    font-size: 12px;
+  }
+  .tool-page .hero-benefits {
+    font-size: 10px;
+    gap: 10px;
+  }
+  .tool-page .mode-tabs button {
+    font-size: 11px;
+    padding: 9px 11px;
+    gap: 5px;
+  }
+  .tool-page .workspace-toolbar {
+    font-size: 10px;
+    padding: 12px 16px;
+  }
+  .tool-page .model-pill {
+    font-size: 9px;
+  }
+  .tool-page .prompt-field label span {
+    display: none;
+  }
+  .ratio-options {
+    gap: 5px;
+  }
+  .ratio-options button {
+    height: 56px;
+  }
+  .tool-page .preview-panel {
+    padding-left: 28px !important;
+    padding-right: 28px !important;
+  }
+  .tool-page .preview-stack {
+    height: 430px;
+  }
+  .tool-page .prompt-field textarea {
+    min-height: 145px;
+  }
+}
