@@ -65,6 +65,27 @@ export function StudioPage({ page }: { page: StudioPageKind }) {
     queryFn: () => apiGet<{ ready: boolean }>('/api/studio/generate'),
     retry: false,
   });
+  const credits = useQuery({
+    queryKey: ['user-credits', session?.user?.id, 'studio'],
+    queryFn: () =>
+      apiGet<{ balance: number; trialRemaining: number }>(
+        '/api/credits?summary=1'
+      ),
+    enabled: Boolean(session?.user),
+  });
+  const trial = useMutation({
+    mutationFn: () =>
+      apiPost<{
+        eligible: boolean;
+        remaining: number;
+        budgetReached?: boolean;
+      }>('/api/credits', {}),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: ['user-credits'] }),
+  });
+  useEffect(() => {
+    if (session?.user?.id) trial.mutate();
+  }, [session?.user?.id]);
   const generation = useMutation({
     onSettled: () =>
       queryClient.invalidateQueries({ queryKey: ['user-credits'] }),
@@ -586,9 +607,32 @@ export function StudioPage({ page }: { page: StudioPageKind }) {
                   )}
                   {generation.isPending
                     ? m['studio.generating']()
-                    : m['studio.generate']()}
+                    : m['studio.trial.generate']()}
                   <ArrowRight size={16} />
                 </button>
+                <p className="service-note">
+                  {!session?.user
+                    ? m['studio.trial.invite']()
+                    : credits.data?.trialRemaining
+                      ? m['studio.trial.remaining']({
+                          count: credits.data.trialRemaining,
+                        })
+                      : trial.data?.budgetReached
+                        ? m['studio.trial.budget']()
+                        : trial.data?.eligible === false
+                          ? m['studio.trial.verify']()
+                          : m['studio.trial.balance']({
+                              count: credits.data?.balance || 0,
+                            })}
+                </p>
+                {session?.user && credits.data?.balance === 0 && (
+                  <div className="generation-feedback">
+                    <p>{m['studio.trial.upgrade']()}</p>
+                    <Link href="/pricing">{m['studio.trial.pack']()} →</Link>
+                    {' · '}
+                    <Link href="/pricing">{m['studio.trial.creator']()} →</Link>
+                  </div>
+                )}
                 <div className="service-note">
                   <span
                     className={

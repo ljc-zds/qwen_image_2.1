@@ -70,7 +70,7 @@ export function StudioPricing() {
       copy: m['studio.pricing.free.copy'](),
       price: 0,
       annual: 0,
-      credits: 0,
+      credits: 3,
       features: [
         m['studio.pricing.library'](),
         m['studio.pricing.copy'](),
@@ -196,14 +196,6 @@ export function StudioPricing() {
           id="plans"
           aria-label={m['studio.pricing.nav']()}
         >
-          <div className="pricing-preview-note">
-            <span>
-              {paymentStatus.data?.environment === 'test'
-                ? m['studio.payment.test']()
-                : m['studio.pricing.preview']()}
-            </span>
-            <p>{m['studio.pricing.notice']()}</p>
-          </div>
           <div className="pricing-pack-offer">
             <div>
               <strong>{m['studio.payment.pack']()}</strong>
@@ -256,7 +248,7 @@ export function StudioPricing() {
                       : m['studio.pricing.monthly_note']()}
                 </p>
                 {plan.id === 'free' ? (
-                  <Link className="pricing-plan-cta" href="/prompts">
+                  <Link className="pricing-plan-cta" href="/image-generator">
                     {m['studio.pricing.free.cta']()}
                     <ArrowRight size={15} />
                   </Link>
@@ -274,7 +266,9 @@ export function StudioPricing() {
                   {plan.credits > 0 && (
                     <p className="pricing-credit-allowance">
                       <Sparkles size={15} />
-                      {m['studio.pricing.credits']({ count: plan.credits })}
+                      {plan.id === 'free'
+                        ? m['studio.trial.welcome']()
+                        : m['studio.pricing.credits']({ count: plan.credits })}
                     </p>
                   )}
                   {plan.features.map((feature) => (
@@ -339,22 +333,12 @@ export function StudioPricing() {
                     <th scope="row">{row.label}</th>
                     {plans.map((plan) => (
                       <td key={plan.id}>
-                        {row.free ? (
-                          <span className="comparison-check">
-                            <Check size={15} />
-                            <span className="sr-only">
-                              {m['studio.pricing.compare.available']()}
-                            </span>
+                        <span className="comparison-check">
+                          <Check size={15} />
+                          <span className="sr-only">
+                            {m['studio.pricing.compare.available']()}
                           </span>
-                        ) : plan.id === 'free' ? (
-                          <span aria-label={m['studio.pricing.compare.none']()}>
-                            —
-                          </span>
-                        ) : (
-                          <span className="comparison-planned">
-                            {m['studio.pricing.compare.planned']()}
-                          </span>
-                        )}
+                        </span>
                       </td>
                     ))}
                   </tr>
@@ -456,9 +440,13 @@ export function StudioPricing() {
                 </small>
               </strong>
               <p>
-                {yearly
-                  ? m['studio.pricing.annual_total']({ amount: chosen.annual })
-                  : m['studio.pricing.monthly_note']()}
+                {selected === 'pack'
+                  ? m['studio.payment.pack_copy']()
+                  : yearly
+                    ? m['studio.pricing.annual_total']({
+                        amount: chosen.annual,
+                      })
+                    : m['studio.pricing.monthly_note']()}
               </p>
               <span>
                 {selected === 'pack'

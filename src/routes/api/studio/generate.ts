@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router';
 
 import { getAuth } from '@/core/auth';
 import { getDbConfigs } from '@/modules/config/service';
-import { consume, revoke } from '@/modules/credits/service';
+import { claimStudioTrial, consume, revoke } from '@/modules/credits/service';
 import {
   createStudioImage,
   isStudioReady,
@@ -55,6 +55,7 @@ export const Route = createFileRoute('/api/studio/generate')({
         let reservedCreditId: string | undefined;
         try {
           if (process.env.STUDIO_REQUIRE_CREDITS !== 'false') {
+            await claimStudioTrial(userId);
             const reserved = await consume({
               userId,
               userEmail: session.user.email,

@@ -20,6 +20,8 @@ import {
 import { getPricingProduct } from '@/config/pricing';
 import { getUuid } from '@/lib/hash';
 
+import { notifyPaymentToFeishu } from './feishu-notify';
+
 const key = (value: string) => createHash('sha256').update(value).digest('hex');
 const date = (value?: string) => {
   const result = new Date(value || '');
@@ -158,6 +160,7 @@ export async function enqueueWaffoEvent(event: WebhookEvent) {
 // All fulfillment and the inbox receipt commit together. Stable period/payment keys
 // also deduplicate different deliveries describing the same charge.
 export async function processWaffoDelivery(id: string) {
+  let notification: WebhookEvent | undefined;
   await db().transaction(async (tx: any) => {
     const [receipt] = await tx
       .select()
@@ -169,6 +172,7 @@ export async function processWaffoDelivery(id: string) {
     if (event.storeId !== waffoStoreId() || event.mode !== waffoEnvironment())
       throw new Error('waffo_wrong_store_or_environment');
     const type = event.eventType;
+    notification = event;
     const supported = [
       'order.completed',
       'subscription.activated',
@@ -437,6 +441,15 @@ export async function processWaffoDelivery(id: string) {
       .set({ status: 'processed', lastError: null })
       .where(eq(paymentWebhook.id, id));
   });
+  if (notification) {
+    try {
+      await notifyPaymentToFeishu(notification);
+    } catch {
+      console.error(
+        'Feishu payment notification failed; payment processing succeeded'
+      );
+    }
+  }
 }
 
 let draining = false;

@@ -63,5 +63,7 @@ export function getPricingProduct(id: string): PricingProduct | null {
   return pricingCatalog[id] ?? null;
 }
 export function listPricingProducts() {
-  return Object.values(pricingCatalog);
+  return Object.values(pricingCatalog).filter(
+    (product) => product.productId !== 'payment_test'
+  );
 }
