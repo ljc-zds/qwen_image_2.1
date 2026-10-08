@@ -610,6 +610,7 @@ export function StudioPage({ page }: { page: StudioPageKind }) {
                     : m['studio.trial.generate']()}
                   <ArrowRight size={16} />
                 </button>
+                <Link href="/settings/gallery">{m['gallery.title']()} →</Link>
                 <p className="service-note">
                   {!session?.user
                     ? m['studio.trial.invite']()

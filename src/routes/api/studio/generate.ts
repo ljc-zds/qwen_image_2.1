@@ -3,6 +3,7 @@ import { createFileRoute } from '@tanstack/react-router';
 import { getAuth } from '@/core/auth';
 import { getDbConfigs } from '@/modules/config/service';
 import { claimStudioTrial, consume, revoke } from '@/modules/credits/service';
+import { galleryReady, saveArtwork } from '@/modules/gallery/service';
 import {
   createStudioImage,
   isStudioReady,
@@ -67,7 +68,18 @@ export const Route = createFileRoute('/api/studio/generate')({
               return respErr('insufficient_credits', { status: 402 });
             reservedCreditId = reserved.consumedCredit.id;
           }
-          return respData(await createStudioImage(input));
+          const result = await createStudioImage(input);
+          if (galleryReady()) {
+            return respData(
+              await saveArtwork({
+                ...input,
+                ...result,
+                userId,
+                creditId: reservedCreditId,
+              })
+            );
+          }
+          return respData(result);
         } catch {
           if (reservedCreditId) await revoke(reservedCreditId);
           return respErr('generation_failed', { status: 502 });

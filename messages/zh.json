@@ -1290,5 +1290,14 @@
   "studio.trial.welcome": "已验证账号一次性赠送 3 张图片",
   "studio.payment.test_name": "支付测试",
   "studio.payment.test_copy": "$0.10 一次性支付，到账后获得 1 图片积分，不自动续费。",
-  "studio.payment.test_cta": "测试支付 · $0.10"
+  "studio.payment.test_cta": "测试支付 · $0.10",
+  "gallery.title": "我的作品",
+  "gallery.description": "图片保存在你的账号下。此前未保存的图片不会出现在这里。",
+  "gallery.create": "生成图片",
+  "gallery.loading": "加载中……",
+  "gallery.error": "暂时无法加载作品，请重试。",
+  "gallery.empty": "生成图片后，保存的作品会显示在这里。",
+  "gallery.download": "下载 PNG",
+  "gallery.previous": "上一页",
+  "gallery.next": "下一页"
 }

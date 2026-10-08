@@ -1290,5 +1290,14 @@
   "studio.trial.welcome": "3 free welcome images, once per verified account",
   "studio.payment.test_name": "Payment test",
   "studio.payment.test_copy": "$0.10 one-time payment. Includes 1 image credit; no renewal.",
-  "studio.payment.test_cta": "Test payment · $0.10"
+  "studio.payment.test_cta": "Test payment · $0.10",
+  "gallery.title": "My creations",
+  "gallery.description": "Images saved to your account. Earlier unsaved images are not included.",
+  "gallery.create": "Create an image",
+  "gallery.loading": "Loading…",
+  "gallery.error": "Could not load your creations. Please try again.",
+  "gallery.empty": "Your saved images will appear here after you create them.",
+  "gallery.download": "Download PNG",
+  "gallery.previous": "Previous",
+  "gallery.next": "Next"
 }
