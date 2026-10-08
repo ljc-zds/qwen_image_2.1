@@ -1,7 +1,14 @@
 import { createFileRoute } from '@tanstack/react-router';
+import { waitUntil } from '@vercel/functions';
 
 import { isWebhookIgnored } from '@/core/payment/types';
+import { verifyWaffoEvent } from '@/core/payment/waffo';
 import { handleWebhook } from '@/modules/payment/service';
+import {
+  drainWaffoInbox,
+  enqueueWaffoEvent,
+  startWaffoWorker,
+} from '@/modules/payment/waffo-service';
 import { respErr, respOk } from '@/lib/resp';
 
 // Ack a webhook the provider should consider delivered.
@@ -29,6 +36,37 @@ export const Route = createFileRoute('/api/payment/notify/$provider')({
       // verification needs the raw body.
       POST: async ({ request, params }) => {
         const { provider } = params;
+
+        if (provider === 'waffo') {
+          if (Number(request.headers.get('content-length')) > 1_000_000)
+            return new Response('Too large', { status: 413 });
+          const raw = await request.text();
+          if (raw.length > 1_000_000)
+            return new Response('Too large', { status: 413 });
+          let event;
+          try {
+            event = verifyWaffoEvent(
+              raw,
+              request.headers.get('x-waffo-signature')
+            );
+          } catch {
+            return new Response('Invalid signature', { status: 401 });
+          }
+          try {
+            await enqueueWaffoEvent(event);
+            if (process.env.VERCEL === '1') {
+              waitUntil(
+                drainWaffoInbox().catch(() =>
+                  console.error('Waffo background processing failed')
+                )
+              );
+            } else startWaffoWorker();
+            // Durable acceptance precedes acknowledgment; fulfillment runs in the worker.
+            return new Response('OK', { status: 200 });
+          } catch {
+            return new Response('Webhook persistence failed', { status: 503 });
+          }
+        }
 
         try {
           const event = await handleWebhook({ req: request, provider });

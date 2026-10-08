@@ -10,12 +10,17 @@ import {
   boolean,
   index,
   integer,
+  pgSchema,
   pgTable,
   text,
   timestamp,
+  type PgTableFn,
 } from 'drizzle-orm/pg-core';
 
-const table = pgTable;
+const schemaName = process.env.DB_SCHEMA || 'public';
+// Qualify every table, including auth and relations, when sharing a database.
+const table: PgTableFn<string | undefined> =
+  schemaName === 'public' ? pgTable : pgSchema(schemaName).table;
 
 // ─── Auth ────────────────────────────────────────────────────────────────────
 
@@ -635,3 +640,30 @@ export type InviteCode = typeof inviteCode.$inferSelect;
 export type NewInviteCode = typeof inviteCode.$inferInsert;
 export type UserInvite = typeof userInvite.$inferSelect;
 export type NewUserInvite = typeof userInvite.$inferInsert;
+
+// Durable Waffo inbox: acknowledge only after persisting a verified delivery.
+export const paymentWebhook = table('payment_webhook', {
+  id: text('id').primaryKey(),
+  businessKey: text('business_key').notNull().unique(),
+  payload: text('payload').notNull(),
+  status: text('status').notNull().default('pending'),
+  lastError: text('last_error'),
+  attempts: integer('attempts').notNull().default(0),
+  nextAttemptAt: timestamp('next_attempt_at'),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+});
+
+export const pageView = table(
+  'page_view',
+  {
+    id: text('id').primaryKey(),
+    visitorHash: text('visitor_hash').notNull(),
+    path: text('path').notNull(),
+    day: text('day').notNull(),
+    createdAt: timestamp('created_at').defaultNow().notNull(),
+  },
+  (t) => [
+    index('page_view_day_path_idx').on(t.day, t.path),
+    index('page_view_created_idx').on(t.createdAt),
+  ]
+);

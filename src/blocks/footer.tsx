@@ -1,10 +1,12 @@
 import { m } from '@/paraglide/messages.js';
 import { SiteFooter } from '@/components/site-footer';
+import { SupportContact } from '@/components/support-contact';
 
 export function Footer() {
   return (
     <SiteFooter
       tagline={m['studio.footer_tagline']()}
+      contact={<SupportContact />}
       columns={[
         {
           title: m['studio.workspace'](),

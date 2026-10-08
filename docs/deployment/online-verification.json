@@ -1,0 +1,45 @@
+{
+  "origin": "https://qwenimage2.site",
+  "verifiedAt": "2026-10-07T12:34:27.745Z",
+  "results": [
+    {
+      "path": "/",
+      "status": 200
+    },
+    {
+      "path": "/zh",
+      "status": 200
+    },
+    {
+      "path": "/image-generator",
+      "status": 200
+    },
+    {
+      "path": "/image-editor",
+      "status": 200
+    },
+    {
+      "path": "/transparent-png",
+      "status": 200
+    },
+    {
+      "path": "/prompts",
+      "status": 200
+    },
+    {
+      "path": "/pricing",
+      "status": 200
+    },
+    {
+      "path": "/sitemap.xml",
+      "status": 200
+    },
+    {
+      "path": "/robots.txt",
+      "status": 200
+    }
+  ],
+  "wwwRedirect": 308,
+  "modelConfigured": true,
+  "authVerified": true
+}

@@ -16,6 +16,7 @@ import { envConfigs } from '@/config';
 import { getQueryClient } from '@/lib/query-client';
 import { getLocale } from '@/paraglide/runtime.js';
 import { Ads } from '@/components/analytics/ads';
+import { FirstPartyAnalytics } from '@/components/analytics/first-party';
 import { GoogleAnalytics } from '@/components/analytics/google-analytics';
 import { Plausible } from '@/components/analytics/plausible';
 import { CustomerService } from '@/components/customer-service';
@@ -102,6 +103,7 @@ function RootComponent() {
         <SandboxPreviewBridge />
         <Toaster position="top-center" richColors />
         <GoogleOneTap />
+        <FirstPartyAnalytics />
         {analytics?.gaId ? (
           <GoogleAnalytics measurementId={analytics.gaId} />
         ) : null}

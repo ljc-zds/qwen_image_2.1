@@ -1,6 +1,7 @@
 import handler from '@tanstack/react-start/server-entry';
 
 import { getCookieFromHeader } from './lib/cookie';
+import { startWaffoWorker } from './modules/payment/waffo-service';
 import { paraglideMiddleware } from './paraglide/server.js';
 
 // On Cloudflare Workers, stash the binding env (D1, ASSETS, …) on globalThis
@@ -29,6 +30,7 @@ function ensureCloudflareEnv(): Promise<void> {
 export default {
   async fetch(req: Request): Promise<Response> {
     await ensureCloudflareEnv();
+    startWaffoWorker();
     const response = await paraglideMiddleware(req, () => handler.fetch(req));
     const utmSource = new URL(req.url).searchParams.get('utm_source');
     const existing = getCookieFromHeader(

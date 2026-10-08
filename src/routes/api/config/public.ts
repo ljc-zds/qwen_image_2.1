@@ -54,6 +54,12 @@ async function GET({ request }: { request: Request }) {
     !!configs.google_client_secret
       ? 'true'
       : 'false';
+  result.github_auth_enabled =
+    configs.github_auth_enabled === 'true' &&
+    !!configs.github_client_id &&
+    !!configs.github_client_secret
+      ? 'true'
+      : 'false';
   const emailConfigured = isEmailSendingConfigured(configs);
   result.password_reset_enabled =
     configs.email_auth_enabled !== 'false' && emailConfigured

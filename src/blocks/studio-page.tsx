@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useForm } from '@tanstack/react-form';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useLocation } from '@tanstack/react-router';
 import {
   ArrowDown,
   ArrowRight,
@@ -28,10 +29,11 @@ import type { StudioPageKind } from '@/lib/studio-seo';
 import { m } from '@/paraglide/messages.js';
 import { getLocale, setLocale } from '@/paraglide/runtime.js';
 import { PromptLibrary } from '@/blocks/prompt-library';
+import { promptExamples } from '@/blocks/prompt-library-catalog';
 import { StudioAccount } from '@/blocks/studio-account';
 import { StudioLogin } from '@/blocks/studio-login';
-import { BuiltWithShipAny } from '@/components/built-with-shipany';
 import { PreviewCarousel } from '@/components/preview-carousel';
+import { SupportContact } from '@/components/support-contact';
 
 import '@/styles/studio.css';
 import '@/styles/workspace.css';
@@ -41,6 +43,8 @@ type Result = { url: string; transparent: boolean };
 const promptSchema = z.object({ prompt: z.string().trim().min(5).max(2000) });
 
 export function StudioPage({ page }: { page: StudioPageKind }) {
+  const location = useLocation();
+  const queryClient = useQueryClient();
   const [mode, setMode] = useState<Mode>(
     page === 'transparent'
       ? 'transparent'
@@ -62,6 +66,8 @@ export function StudioPage({ page }: { page: StudioPageKind }) {
     retry: false,
   });
   const generation = useMutation({
+    onSettled: () =>
+      queryClient.invalidateQueries({ queryKey: ['user-credits'] }),
     mutationFn: (prompt: string) =>
       apiPost<Result>('/api/studio/generate', {
         prompt,
@@ -76,11 +82,13 @@ export function StudioPage({ page }: { page: StudioPageKind }) {
     onError: (error: Error) => {
       if (error.message === 'unauthorized') setLoginOpen(true);
       setFeedback(
-        error.message === 'not_configured'
-          ? m['studio.unavailable']()
-          : error.message === 'unauthorized'
-            ? m['studio.signin_required']()
-            : m['studio.failed']()
+        error.message === 'insufficient_credits'
+          ? m['studio.payment.insufficient']()
+          : error.message === 'not_configured'
+            ? m['studio.unavailable']()
+            : error.message === 'unauthorized'
+              ? m['studio.signin_required']()
+              : m['studio.failed']()
       );
     },
   });
@@ -115,18 +123,30 @@ export function StudioPage({ page }: { page: StudioPageKind }) {
   useEffect(() => {
     let active = true;
     void takeStudioDraft(currentPathWithQuery())
+      .catch(() => null)
       .then((draft) => {
-        if (!active || !draft) return;
-        form.setFieldValue('prompt', draft.prompt);
-        setMode(draft.mode);
-        setRatio(draft.ratio);
-        setReference(draft.reference);
+        if (!active) return;
+        if (draft) {
+          form.setFieldValue('prompt', draft.prompt);
+          setMode(draft.mode);
+          setRatio(draft.ratio);
+          setReference(draft.reference);
+          return;
+        }
+        const id = new URLSearchParams(window.location.search).get('example');
+        const example = promptExamples().find((item) => item.id === id);
+        if (example) {
+          form.setFieldValue('prompt', example.prompt);
+          setMode(example.mode);
+          setReference(null);
+          setFeedback('');
+        }
       })
       .catch(() => undefined);
     return () => {
       active = false;
     };
-  }, [page]);
+  }, [page, location.searchStr]);
 
   async function preserveDraft() {
     await saveStudioDraft(currentPathWithQuery(), {
@@ -860,6 +880,7 @@ export function StudioPage({ page }: { page: StudioPageKind }) {
               <span>{envConfigs.app_name}</span>
             </Link>
             <p>{m['studio.footer_tagline']()}</p>
+            <SupportContact />
           </div>
           <div className="footer-links">
             <Link href="/transparent-png">{m['studio.nav.png']()}</Link>
@@ -875,7 +896,6 @@ export function StudioPage({ page }: { page: StudioPageKind }) {
             © {new Date().getFullYear()} {envConfigs.app_name}.{' '}
             {m['studio.independent']()}
           </span>
-          <BuiltWithShipAny />
         </div>
       </footer>
     </div>

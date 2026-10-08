@@ -697,3 +697,34 @@ export type InviteCode = typeof inviteCode.$inferSelect;
 export type NewInviteCode = typeof inviteCode.$inferInsert;
 export type UserInvite = typeof userInvite.$inferSelect;
 export type NewUserInvite = typeof userInvite.$inferInsert;
+
+// Durable Waffo inbox: acknowledge only after persisting a verified delivery.
+export const paymentWebhook = table('payment_webhook', {
+  id: text('id').primaryKey(),
+  businessKey: text('business_key').notNull().unique(),
+  payload: text('payload').notNull(),
+  status: text('status').notNull().default('pending'),
+  lastError: text('last_error'),
+  attempts: integer('attempts').notNull().default(0),
+  nextAttemptAt: integer('next_attempt_at', { mode: 'timestamp_ms' }),
+  createdAt: integer('created_at', { mode: 'timestamp_ms' })
+    .default(sqliteNowMs)
+    .notNull(),
+});
+
+export const pageView = table(
+  'page_view',
+  {
+    id: text('id').primaryKey(),
+    visitorHash: text('visitor_hash').notNull(),
+    path: text('path').notNull(),
+    day: text('day').notNull(),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' })
+      .notNull()
+      .default(sqliteNowMs),
+  },
+  (t) => [
+    index('page_view_day_path_idx').on(t.day, t.path),
+    index('page_view_created_idx').on(t.createdAt),
+  ]
+);

@@ -28,6 +28,7 @@ import {
   type UpdateSubscription,
 } from '@/modules/subscriptions/service';
 import { getSnowId, getUniSeq, getUuid } from '@/lib/hash';
+import { cancelWaffoSubscription } from './waffo-service';
 
 // --- Order types ---
 
@@ -585,6 +586,8 @@ export async function cancelUserSubscription(params: {
   const sub = await findBySubscriptionNo(subscriptionNo);
   if (!sub) throw new Error('Subscription not found');
   if (sub.userId !== userId) throw new Error('Forbidden');
+
+  if (sub.paymentProvider === 'waffo') return cancelWaffoSubscription(userId, subscriptionNo);
 
   if (
     sub.status === SubscriptionStatus.CANCELED ||

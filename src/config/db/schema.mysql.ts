@@ -561,3 +561,30 @@ export type NewTicketMessage = typeof ticketMessage.$inferInsert;
 
 // ─── Custom tables ───────────────────────────────────────────────────────────
 // Add your own tables below this line.
+
+// Durable Waffo inbox: acknowledge only after persisting a verified delivery.
+export const paymentWebhook = table('payment_webhook', {
+  id: varchar('id', { length: 255 }).primaryKey(),
+  businessKey: varchar('business_key', { length: 255 }).notNull().unique(),
+  payload: text('payload').notNull(),
+  status: varchar('status', { length: 255 }).notNull().default('pending'),
+  lastError: text('last_error'),
+  attempts: int('attempts').notNull().default(0),
+  nextAttemptAt: timestamp('next_attempt_at'),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+});
+
+export const pageView = table(
+  'page_view',
+  {
+    id: varchar191('id').primaryKey(),
+    visitorHash: varchar191('visitor_hash').notNull(),
+    path: varchar191('path').notNull(),
+    day: varchar191('day').notNull(),
+    createdAt: timestamp('created_at').defaultNow().notNull(),
+  },
+  (t) => [
+    index('page_view_day_path_idx').on(t.day, t.path),
+    index('page_view_created_idx').on(t.createdAt),
+  ]
+);

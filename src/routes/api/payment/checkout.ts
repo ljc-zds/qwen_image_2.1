@@ -4,6 +4,7 @@ import { getAuth } from '@/core/auth';
 import { getPricingProduct } from '@/config/pricing';
 import { getAllConfigs } from '@/modules/config/service';
 import { createCheckout } from '@/modules/payment/service';
+import { createWaffoCheckout } from '@/modules/payment/waffo-service';
 import { enforceMinIntervalRateLimit } from '@/lib/rate-limit';
 import { respData, respErr } from '@/lib/resp';
 
@@ -24,6 +25,9 @@ function safeSameOriginPath(
 }
 
 async function POST({ request }: { request: Request }) {
+  const origin = request.headers.get('origin');
+  if (origin && origin !== new URL(request.url).origin)
+    return respErr('Forbidden', { status: 403 });
   const limited = enforceMinIntervalRateLimit(request, {
     intervalMs: 1000,
     keyPrefix: 'checkout',
@@ -35,7 +39,7 @@ async function POST({ request }: { request: Request }) {
     const session = await auth.api.getSession({ headers: request.headers });
 
     if (!session?.user) {
-      return respErr('Unauthorized');
+      return respErr('Unauthorized', { status: 401 });
     }
 
     const body = await request.json().catch(() => ({}));
@@ -50,6 +54,10 @@ async function POST({ request }: { request: Request }) {
     const product = getPricingProduct(product_id);
     if (!product) {
       return respErr('Unknown product');
+    }
+
+    if (payment_provider === 'waffo') {
+      return respData(await createWaffoCheckout(session.user, product_id));
     }
 
     // Optional per-provider "test amount" override (admin-configured).

@@ -1,0 +1,58 @@
+{
+  "verifiedAt": "2026-10-07T13:02:33.374Z",
+  "origin": "https://qwenimage2.site",
+  "results": [
+    {
+      "path": "/",
+      "status": 200,
+      "supportEmailVisible": true
+    },
+    {
+      "path": "/image-generator",
+      "status": 200,
+      "supportEmailVisible": true
+    },
+    {
+      "path": "/image-editor",
+      "status": 200,
+      "supportEmailVisible": true
+    },
+    {
+      "path": "/transparent-png",
+      "status": 200,
+      "supportEmailVisible": true
+    },
+    {
+      "path": "/prompts",
+      "status": 200,
+      "supportEmailVisible": true
+    },
+    {
+      "path": "/pricing",
+      "status": 200,
+      "supportEmailVisible": true
+    },
+    {
+      "path": "/terms-of-service",
+      "status": 200,
+      "supportEmailVisible": true
+    },
+    {
+      "path": "/zh/terms-of-service",
+      "status": 200,
+      "supportEmailVisible": true
+    },
+    {
+      "path": "/privacy-policy",
+      "status": 200,
+      "supportEmailVisible": true
+    },
+    {
+      "path": "/zh/privacy-policy",
+      "status": 200,
+      "supportEmailVisible": true
+    }
+  ],
+  "refundWindowDays": 7,
+  "contentPolicyInTerms": true
+}

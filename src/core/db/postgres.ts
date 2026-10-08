@@ -16,11 +16,8 @@ let client: ReturnType<typeof postgres> | null = null;
 export function createPostgresDb(config: DbConfig) {
   let databaseUrl = config.database_url;
 
-  const schemaName = (config.db_schema || 'public').trim();
-  const connectionSchemaOptions =
-    schemaName && schemaName !== 'public'
-      ? { connection: { options: `-c search_path=${schemaName}` } }
-      : {};
+  // The PostgreSQL schema template qualifies every table with DB_SCHEMA.
+  // Do not send search_path in startup options: Neon pooled connections reject it.
 
   if (isCloudflareWorker) {
     // Prefer the Hyperdrive binding — direct Workers→Postgres pays a full
@@ -49,7 +46,6 @@ export function createPostgresDb(config: DbConfig) {
       max: 1,
       idle_timeout: 10,
       connect_timeout: 5,
-      ...connectionSchemaOptions,
     });
 
     return drizzle(client);
@@ -66,7 +62,6 @@ export function createPostgresDb(config: DbConfig) {
       max: Number(config.db_max_connections) || 1,
       idle_timeout: 30,
       connect_timeout: 10,
-      ...connectionSchemaOptions,
     });
 
     dbInstance = drizzle({ client });
@@ -79,7 +74,6 @@ export function createPostgresDb(config: DbConfig) {
     max: 1,
     idle_timeout: 20,
     connect_timeout: 10,
-    ...connectionSchemaOptions,
   });
 
   return drizzle({ client: serverlessClient });

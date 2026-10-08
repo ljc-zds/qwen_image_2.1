@@ -1,12 +1,16 @@
 import { useState } from 'react';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { ArrowRight, Check, Layers, Menu, Sparkles, X } from 'lucide-react';
 
+import { useSession } from '@/core/auth/client';
 import { Link } from '@/core/i18n/navigation';
 import { envConfigs } from '@/config';
+import { apiGet, apiPost } from '@/lib/api-client';
 import { m } from '@/paraglide/messages.js';
 import { getLocale, setLocale } from '@/paraglide/runtime.js';
 import { StudioAccount } from '@/blocks/studio-account';
-import { BuiltWithShipAny } from '@/components/built-with-shipany';
+import { StudioLogin } from '@/blocks/studio-login';
+import { SupportContact } from '@/components/support-contact';
 import {
   Dialog,
   DialogClose,
@@ -19,9 +23,33 @@ import '@/styles/studio.css';
 import '@/styles/studio-pricing.css';
 
 export function StudioPricing() {
-  const [yearly, setYearly] = useState(false);
+  const yearly = false;
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [selected, setSelected] = useState<'creator' | 'pro' | null>(null);
+  const [selected, setSelected] = useState<'creator' | 'pro' | 'pack' | null>(
+    null
+  );
+  const { data: session } = useSession();
+  const [loginOpen, setLoginOpen] = useState(false);
+  const paymentStatus = useQuery({
+    queryKey: ['payment-status'],
+    queryFn: () =>
+      apiGet<{ ready: boolean; environment: string }>('/api/payment/status'),
+  });
+  const checkout = useMutation({
+    mutationFn: (sku: string) =>
+      apiPost<{ checkout_url: string }>('/api/payment/checkout', {
+        product_id: sku,
+        payment_provider: 'waffo',
+      }),
+  });
+  const choose = (id: 'creator' | 'pro' | 'pack') => {
+    checkout.reset();
+    if (!session?.user) {
+      setLoginOpen(true);
+      return;
+    }
+    setSelected(id);
+  };
   const navigation = [
     { href: '/image-generator', label: m['studio.nav.create']() },
     { href: '/transparent-png', label: m['studio.nav.png']() },
@@ -55,7 +83,7 @@ export function StudioPricing() {
       copy: m['studio.pricing.creator.copy'](),
       price: yearly ? 9 : 12,
       annual: 108,
-      credits: 300,
+      credits: 100,
       features: common,
     },
     {
@@ -64,11 +92,20 @@ export function StudioPricing() {
       copy: m['studio.pricing.pro.copy'](),
       price: yearly ? 24 : 29,
       annual: 288,
-      credits: 1000,
+      credits: 300,
       features: common,
     },
   ];
-  const chosen = plans.find((plan) => plan.id === selected);
+  const chosen =
+    selected === 'pack'
+      ? {
+          id: 'pack',
+          name: m['studio.payment.pack'](),
+          price: 9.9,
+          annual: 0,
+          credits: 80,
+        }
+      : plans.find((plan) => plan.id === selected);
   const comparison = [
     { label: m['studio.pricing.library'](), free: true },
     { label: m['studio.pricing.copy'](), free: true },
@@ -153,27 +190,6 @@ export function StudioPricing() {
           </span>
           <h1>{m['studio.pricing.heading']()}</h1>
           <p>{m['studio.pricing.subtitle']()}</p>
-          <div
-            className="pricing-billing"
-            role="group"
-            aria-label={m['studio.pricing.billing']()}
-          >
-            <button
-              type="button"
-              aria-pressed={!yearly}
-              onClick={() => setYearly(false)}
-            >
-              {m['studio.pricing.monthly']()}
-            </button>
-            <button
-              type="button"
-              aria-pressed={yearly}
-              onClick={() => setYearly(true)}
-            >
-              {m['studio.pricing.yearly']()}
-            </button>
-            <span>{m['studio.pricing.saving']()}</span>
-          </div>
         </section>
         <section
           className="pricing-plans-section"
@@ -181,8 +197,25 @@ export function StudioPricing() {
           aria-label={m['studio.pricing.nav']()}
         >
           <div className="pricing-preview-note">
-            <span>{m['studio.pricing.preview']()}</span>
+            <span>
+              {paymentStatus.data?.environment === 'test'
+                ? m['studio.payment.test']()
+                : m['studio.pricing.preview']()}
+            </span>
             <p>{m['studio.pricing.notice']()}</p>
+          </div>
+          <div className="pricing-pack-offer">
+            <div>
+              <strong>{m['studio.payment.pack']()}</strong>
+              <p>{m['studio.payment.pack_copy']()}</p>
+            </div>
+            <button
+              className="pricing-plan-cta"
+              type="button"
+              onClick={() => choose('pack')}
+            >
+              {m['studio.payment.pack_cta']()} <ArrowRight size={15} />
+            </button>
           </div>
           <div className="pricing-plan-grid">
             {plans.map((plan) => (
@@ -231,7 +264,7 @@ export function StudioPricing() {
                   <button
                     className="pricing-plan-cta"
                     type="button"
-                    onClick={() => setSelected(plan.id)}
+                    onClick={() => choose(plan.id)}
                   >
                     {m['studio.pricing.paid.cta']()}
                     <ArrowRight size={15} />
@@ -262,6 +295,14 @@ export function StudioPricing() {
           <p className="pricing-no-payment">
             {m['studio.pricing.no_payment']()}
           </p>
+          <p className="pricing-no-payment">
+            <Link
+              href="/terms-of-service#refunds"
+              className="underline underline-offset-4"
+            >
+              {m['studio.refund.summary']()}
+            </Link>
+          </p>
         </section>
         <section className="pricing-comparison">
           <div className="pricing-section-heading">
@@ -290,8 +331,8 @@ export function StudioPricing() {
                 <tr>
                   <th scope="row">{m['studio.pricing.compare.credits']()}</th>
                   <td>—</td>
+                  <td>100</td>
                   <td>300</td>
-                  <td>1,000</td>
                 </tr>
                 {comparison.map((row) => (
                   <tr key={row.label}>
@@ -356,6 +397,7 @@ export function StudioPricing() {
               <span>{envConfigs.app_name}</span>
             </Link>
             <p>{m['studio.footer_tagline']()}</p>
+            <SupportContact />
           </div>
           <div className="footer-links">
             {navigation.map((item) => (
@@ -372,9 +414,13 @@ export function StudioPricing() {
             © {new Date().getFullYear()} {envConfigs.app_name}.{' '}
             {m['studio.independent']()}
           </span>
-          <BuiltWithShipAny />
         </div>
       </footer>
+      <StudioLogin
+        open={loginOpen}
+        onOpenChange={setLoginOpen}
+        beforeNavigate={async () => {}}
+      />
       <Dialog
         open={!!chosen}
         onOpenChange={(open) => {
@@ -395,13 +441,19 @@ export function StudioPricing() {
             {m['studio.pricing.dialog.title']({ plan: chosen?.name ?? '' })}
           </DialogTitle>
           <DialogDescription>
-            {m['studio.pricing.dialog.copy']()}
+            {paymentStatus.data?.ready
+              ? m['studio.payment.checkout_copy']()
+              : m['studio.payment.setup_needed']()}
           </DialogDescription>
           {chosen && (
             <div className="pricing-dialog-summary">
               <strong>
                 ${chosen.price}
-                <small>{m['studio.pricing.per_month']()}</small>
+                <small>
+                  {selected === 'pack'
+                    ? m['studio.payment.once']()
+                    : m['studio.pricing.per_month']()}
+                </small>
               </strong>
               <p>
                 {yearly
@@ -409,11 +461,43 @@ export function StudioPricing() {
                   : m['studio.pricing.monthly_note']()}
               </p>
               <span>
-                {m['studio.pricing.credits']({ count: chosen.credits })}
+                {selected === 'pack'
+                  ? m['studio.payment.pack_copy']()
+                  : m['studio.pricing.credits']({ count: chosen.credits })}
               </span>
             </div>
           )}
-          <Link href="/prompts" className="pricing-dialog-link">
+          <button
+            className="pricing-plan-cta"
+            type="button"
+            disabled={!paymentStatus.data?.ready || checkout.isPending}
+            onClick={() =>
+              checkout.data
+                ? window.open(
+                    checkout.data.checkout_url,
+                    '_blank',
+                    'noopener,noreferrer'
+                  )
+                : checkout.mutate(
+                    selected === 'pack' ? 'image_pack' : selected + '_monthly'
+                  )
+            }
+          >
+            {checkout.isPending
+              ? m['studio.payment.preparing']()
+              : checkout.data
+                ? m['studio.payment.open']()
+                : m['studio.payment.prepare']()}
+          </button>
+          {checkout.isError && (
+            <p role="alert">
+              {checkout.error.message === 'waffo_subscription_exists'
+                ? m['studio.payment.exists']()
+                : m['studio.payment.failed']()}
+            </p>
+          )}
+          {checkout.data && <p>{m['studio.payment.confirmed_by_webhook']()}</p>}
+          <Link href="/settings/billing" className="pricing-dialog-link">
             {m['studio.pricing.dialog.back']()}
             <ArrowRight size={15} />
           </Link>

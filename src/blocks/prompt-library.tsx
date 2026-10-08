@@ -3,7 +3,7 @@ import { PromptGallery, type PromptExample } from '@/components/prompt-gallery';
 
 import '@/styles/prompt-library.css';
 
-import { expandedPromptExamples } from '@/blocks/prompt-library-catalog';
+import { promptExamples } from '@/blocks/prompt-library-catalog';
 
 export function PromptLibrary({
   onUse,
@@ -18,90 +18,7 @@ export function PromptLibrary({
     { id: 'illustration', label: m['studio.library.category.illustration']() },
     { id: 'sticker', label: m['studio.library.category.sticker']() },
   ];
-  const items: PromptExample[] = [
-    ...expandedPromptExamples(),
-    {
-      id: 'space-cat',
-      title: m['studio.example.product'](),
-      category: 'surreal',
-      image: '/imgs/original/space-cat-koi.webp',
-      alt: m['studio.carousel.product_alt'](),
-      prompt: m['studio.prompt.product'](),
-      mode: 'generate',
-    },
-    {
-      id: 'cloud-house',
-      title: m['studio.library.cloud_house.title'](),
-      category: 'surreal',
-      image: '/imgs/original/cloud-house.webp',
-      alt: m['studio.library.cloud_house.title'](),
-      prompt: m['studio.library.cloud_house.prompt'](),
-      mode: 'generate',
-    },
-    {
-      id: 'rain-portrait',
-      title: m['studio.library.rain_portrait.title'](),
-      category: 'portrait',
-      image: '/imgs/original/rain-portrait.webp',
-      alt: m['studio.library.rain_portrait.title'](),
-      prompt: m['studio.library.rain_portrait.prompt'](),
-      mode: 'generate',
-    },
-    {
-      id: 'ramen-city',
-      title: m['studio.example.editorial'](),
-      category: 'surreal',
-      image: '/imgs/original/ramen-miniature-city.webp',
-      alt: m['studio.carousel.editorial_alt'](),
-      prompt: m['studio.prompt.editorial'](),
-      mode: 'generate',
-    },
-    {
-      id: 'matcha-dessert',
-      title: m['studio.library.matcha_dessert.title'](),
-      category: 'food',
-      image: '/imgs/original/matcha-dessert.webp',
-      alt: m['studio.library.matcha_dessert.title'](),
-      prompt: m['studio.library.matcha_dessert.prompt'](),
-      mode: 'generate',
-    },
-    {
-      id: 'fox-library',
-      title: m['studio.library.fox_library.title'](),
-      category: 'illustration',
-      image: '/imgs/original/fox-library.webp',
-      alt: m['studio.library.fox_library.title'](),
-      prompt: m['studio.library.fox_library.prompt'](),
-      mode: 'generate',
-    },
-    {
-      id: 'chrome-sneaker',
-      title: m['studio.library.chrome_sneaker.title'](),
-      category: 'product',
-      image: '/imgs/original/chrome-sneaker.webp',
-      alt: m['studio.library.chrome_sneaker.title'](),
-      prompt: m['studio.library.chrome_sneaker.prompt'](),
-      mode: 'generate',
-    },
-    {
-      id: 'otter-sticker',
-      title: m['studio.example.sticker'](),
-      category: 'sticker',
-      image: '/imgs/original/astronaut-otter-sticker.webp',
-      alt: m['studio.carousel.sticker_alt'](),
-      prompt: m['studio.prompt.sticker'](),
-      mode: 'transparent',
-    },
-    {
-      id: 'perfume',
-      title: m['studio.library.perfume.title'](),
-      category: 'product',
-      image: '/imgs/original/perfume-product.webp',
-      alt: m['studio.library.perfume.title'](),
-      prompt: m['studio.library.perfume.prompt'](),
-      mode: 'generate',
-    },
-  ];
+  const items = promptExamples();
   return (
     <section className="prompt-library" id="inspiration">
       <div className="library-intro">

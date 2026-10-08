@@ -1,0 +1,25 @@
+{
+  "domain": "qwenimage2.site",
+  "project": "qwenimage2",
+  "projectId": "prj_YFz8Q0GRkogd4zCXZ0zfKJ8wTXVo",
+  "nameservers": [
+    "eleanor.ns.cloudflare.com",
+    "quincy.ns.cloudflare.com"
+  ],
+  "records": [
+    {
+      "type": "CNAME",
+      "name": "qwenimage2.site",
+      "content": "4ee1f92c64acee0f.vercel-dns-017.com",
+      "ttl": 1,
+      "proxied": false
+    },
+    {
+      "type": "CNAME",
+      "name": "www.qwenimage2.site",
+      "content": "4ee1f92c64acee0f.vercel-dns-017.com",
+      "ttl": 1,
+      "proxied": false
+    }
+  ]
+}

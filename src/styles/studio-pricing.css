@@ -496,3 +496,33 @@
     line-height: 1.8;
   }
 }
+
+.pricing-pack-offer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin: 24px 0;
+  padding: 24px;
+  border: 1px solid #e5d9ff;
+  border-radius: 12px;
+  background: #fbf8ff;
+}
+.pricing-pack-offer p {
+  margin: 8px 0 0;
+  color: #718096;
+}
+.pricing-pack-offer .pricing-plan-cta {
+  width: auto;
+  padding: 12px 24px;
+}
+.pricing-plan-cta:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+@media (max-width: 640px) {
+  .pricing-pack-offer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}

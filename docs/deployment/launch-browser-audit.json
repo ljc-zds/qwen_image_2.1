@@ -1,0 +1,266 @@
+[
+  {
+    "path": "/",
+    "width": 390,
+    "overflow": false,
+    "title": "Qwen Image 2.1 — AI Image Creation Studio | Prism Studio",
+    "description": "Explore Qwen Image 2.1 tools, original prompt ideas, image editing and transparent PNG workflows. Find your next creative direction with Prism Studio.",
+    "canonical": "http://localhost:3000/",
+    "h1": 1,
+    "missingDimensions": 0,
+    "metrics": {
+      "cls": 0.004306482091346153,
+      "lcp": 476
+    }
+  },
+  {
+    "path": "/image-generator",
+    "width": 390,
+    "overflow": false,
+    "title": "Qwen Image 2.1 Generator & Editor | Prism Studio",
+    "description": "Explore Qwen Image 2.1 generation, photo editing and transparent PNGs in Prism Studio. Try original prompt ideas and prepare your next image.",
+    "canonical": "http://localhost:3000/image-generator",
+    "h1": 1,
+    "missingDimensions": 0,
+    "metrics": {
+      "cls": 0.0003834377003205128,
+      "lcp": 176
+    }
+  },
+  {
+    "path": "/image-editor",
+    "width": 390,
+    "overflow": false,
+    "title": "Qwen Image 2.1 Image Editor | Prism Studio",
+    "description": "Plan Qwen Image 2.1 image edits with a reference photo and clear instructions. Upload an image, choose a ratio and describe what to preserve.",
+    "canonical": "http://localhost:3000/image-editor",
+    "h1": 1,
+    "missingDimensions": 0,
+    "metrics": {
+      "cls": 0.00019704411057692306,
+      "lcp": 80
+    }
+  },
+  {
+    "path": "/transparent-png",
+    "width": 390,
+    "overflow": false,
+    "title": "Qwen Image 2.1 Transparent PNG Generator | Prism Studio",
+    "description": "Prepare Qwen Image 2.1 transparent PNG prompts for stickers, cutouts and design assets. Explore native RGBA and practical alpha-channel tips.",
+    "canonical": "http://localhost:3000/transparent-png",
+    "h1": 1,
+    "missingDimensions": 0,
+    "metrics": {
+      "cls": 0.0002011206330128205,
+      "lcp": 40
+    }
+  },
+  {
+    "path": "/prompts",
+    "width": 390,
+    "overflow": false,
+    "title": "Qwen Image 2.1 Prompts & Examples | Prism Studio",
+    "description": "Explore Qwen Image 2.1 prompt ideas with original images: surreal worlds, portraits, products and stickers. Filter, copy and customize in Prism Studio.",
+    "canonical": "http://localhost:3000/prompts",
+    "h1": 1,
+    "missingDimensions": 0,
+    "metrics": {
+      "cls": 0.00019704411057692306,
+      "lcp": 68
+    }
+  },
+  {
+    "path": "/pricing",
+    "width": 390,
+    "overflow": false,
+    "title": "Qwen Image 2.1 Pricing & Plans | Prism Studio",
+    "description": "Compare Prism Studio pricing for Qwen Image 2.1: Creator $12/month for 100 images, Pro $29/month for 300 images, or an $9.90 80-image pack.",
+    "canonical": "http://localhost:3000/pricing",
+    "h1": 1,
+    "missingDimensions": 0,
+    "metrics": {
+      "cls": 0.00004755384615384616,
+      "lcp": 64
+    }
+  },
+  {
+    "path": "/",
+    "width": 768,
+    "overflow": false,
+    "title": "Qwen Image 2.1 — AI Image Creation Studio | Prism Studio",
+    "description": "Explore Qwen Image 2.1 tools, original prompt ideas, image editing and transparent PNG workflows. Find your next creative direction with Prism Studio.",
+    "canonical": "http://localhost:3000/",
+    "h1": 1,
+    "missingDimensions": 0,
+    "metrics": {
+      "cls": 0.0038160999348958334,
+      "lcp": 304
+    }
+  },
+  {
+    "path": "/image-generator",
+    "width": 768,
+    "overflow": false,
+    "title": "Qwen Image 2.1 Generator & Editor | Prism Studio",
+    "description": "Explore Qwen Image 2.1 generation, photo editing and transparent PNGs in Prism Studio. Try original prompt ideas and prepare your next image.",
+    "canonical": "http://localhost:3000/image-generator",
+    "h1": 1,
+    "missingDimensions": 0,
+    "metrics": {
+      "cls": 0.0008289599202473959,
+      "lcp": 52
+    }
+  },
+  {
+    "path": "/image-editor",
+    "width": 768,
+    "overflow": false,
+    "title": "Qwen Image 2.1 Image Editor | Prism Studio",
+    "description": "Plan Qwen Image 2.1 image edits with a reference photo and clear instructions. Upload an image, choose a ratio and describe what to preserve.",
+    "canonical": "http://localhost:3000/image-editor",
+    "h1": 1,
+    "missingDimensions": 0,
+    "metrics": {
+      "cls": 0.0008268898111979167,
+      "lcp": 40
+    }
+  },
+  {
+    "path": "/transparent-png",
+    "width": 768,
+    "overflow": false,
+    "title": "Qwen Image 2.1 Transparent PNG Generator | Prism Studio",
+    "description": "Prepare Qwen Image 2.1 transparent PNG prompts for stickers, cutouts and design assets. Explore native RGBA and practical alpha-channel tips.",
+    "canonical": "http://localhost:3000/transparent-png",
+    "h1": 1,
+    "missingDimensions": 0,
+    "metrics": {
+      "cls": 0.0008268898111979167,
+      "lcp": 36
+    }
+  },
+  {
+    "path": "/prompts",
+    "width": 768,
+    "overflow": false,
+    "title": "Qwen Image 2.1 Prompts & Examples | Prism Studio",
+    "description": "Explore Qwen Image 2.1 prompt ideas with original images: surreal worlds, portraits, products and stickers. Filter, copy and customize in Prism Studio.",
+    "canonical": "http://localhost:3000/prompts",
+    "h1": 1,
+    "missingDimensions": 0,
+    "metrics": {
+      "cls": 0.0008268898111979167,
+      "lcp": 60
+    }
+  },
+  {
+    "path": "/pricing",
+    "width": 768,
+    "overflow": false,
+    "title": "Qwen Image 2.1 Pricing & Plans | Prism Studio",
+    "description": "Compare Prism Studio pricing for Qwen Image 2.1: Creator $12/month for 100 images, Pro $29/month for 300 images, or an $9.90 80-image pack.",
+    "canonical": "http://localhost:3000/pricing",
+    "h1": 1,
+    "missingDimensions": 0,
+    "metrics": {
+      "cls": 0.0006240234375,
+      "lcp": 40
+    }
+  },
+  {
+    "path": "/",
+    "width": 1440,
+    "overflow": false,
+    "title": "Qwen Image 2.1 — AI Image Creation Studio | Prism Studio",
+    "description": "Explore Qwen Image 2.1 tools, original prompt ideas, image editing and transparent PNG workflows. Find your next creative direction with Prism Studio.",
+    "canonical": "http://localhost:3000/",
+    "h1": 1,
+    "missingDimensions": 0,
+    "metrics": {
+      "cls": 0.003243732940297068,
+      "lcp": 300
+    }
+  },
+  {
+    "path": "/image-generator",
+    "width": 1440,
+    "overflow": false,
+    "title": "Qwen Image 2.1 Generator & Editor | Prism Studio",
+    "description": "Explore Qwen Image 2.1 generation, photo editing and transparent PNGs in Prism Studio. Try original prompt ideas and prepare your next image.",
+    "canonical": "http://localhost:3000/image-generator",
+    "h1": 1,
+    "missingDimensions": 0,
+    "metrics": {
+      "cls": 0.00032061579198013117,
+      "lcp": 80
+    }
+  },
+  {
+    "path": "/image-editor",
+    "width": 1440,
+    "overflow": false,
+    "title": "Qwen Image 2.1 Image Editor | Prism Studio",
+    "description": "Plan Qwen Image 2.1 image edits with a reference photo and clear instructions. Upload an image, choose a ratio and describe what to preserve.",
+    "canonical": "http://localhost:3000/image-editor",
+    "h1": 1,
+    "missingDimensions": 0,
+    "metrics": {
+      "cls": 0.00031984908492476853,
+      "lcp": 56
+    }
+  },
+  {
+    "path": "/transparent-png",
+    "width": 1440,
+    "overflow": false,
+    "title": "Qwen Image 2.1 Transparent PNG Generator | Prism Studio",
+    "description": "Prepare Qwen Image 2.1 transparent PNG prompts for stickers, cutouts and design assets. Explore native RGBA and practical alpha-channel tips.",
+    "canonical": "http://localhost:3000/transparent-png",
+    "h1": 1,
+    "missingDimensions": 0,
+    "metrics": {
+      "cls": 0.00031984908492476853,
+      "lcp": 52
+    }
+  },
+  {
+    "path": "/prompts",
+    "width": 1440,
+    "overflow": false,
+    "title": "Qwen Image 2.1 Prompts & Examples | Prism Studio",
+    "description": "Explore Qwen Image 2.1 prompt ideas with original images: surreal worlds, portraits, products and stickers. Filter, copy and customize in Prism Studio.",
+    "canonical": "http://localhost:3000/prompts",
+    "h1": 1,
+    "missingDimensions": 0,
+    "metrics": {
+      "cls": 0.00031984908492476853,
+      "lcp": 68
+    }
+  },
+  {
+    "path": "/pricing",
+    "width": 1440,
+    "overflow": false,
+    "title": "Qwen Image 2.1 Pricing & Plans | Prism Studio",
+    "description": "Compare Prism Studio pricing for Qwen Image 2.1: Creator $12/month for 100 images, Pro $29/month for 300 images, or an $9.90 80-image pack.",
+    "canonical": "http://localhost:3000/pricing",
+    "h1": 1,
+    "missingDimensions": 0,
+    "metrics": {
+      "cls": 0.0006752445173852237,
+      "lcp": 72
+    }
+  },
+  {
+    "theme": "light",
+    "color": "rgb(2, 8, 23)",
+    "background": "rgb(255, 255, 255)",
+    "colorScheme": "light"
+  },
+  {
+    "theme": "dark",
+    "color": "rgb(2, 8, 23)",
+    "background": "rgb(255, 255, 255)",
+    "colorScheme": "light"
+  }
+]

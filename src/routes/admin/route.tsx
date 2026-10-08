@@ -1,5 +1,6 @@
 import { createFileRoute, Outlet } from '@tanstack/react-router';
 import {
+  ChartColumn,
   CreditCard,
   FolderOpen,
   Home,
@@ -8,8 +9,10 @@ import {
   Shield,
 } from 'lucide-react';
 
+import { usePathname } from '@/core/i18n/navigation';
 import { envConfigs } from '@/config';
 import { m } from '@/paraglide/messages.js';
+import { useUserPermissions } from '@/hooks/use-user-permissions';
 import { AppLayout } from '@/components/app-layout';
 
 export const Route = createFileRoute('/admin')({
@@ -17,8 +20,17 @@ export const Route = createFileRoute('/admin')({
 });
 
 function AdminLayout() {
+  const pathname = usePathname();
+  const { data: permissions } = useUserPermissions();
+  const trafficOnly = permissions?.isAdmin !== true;
   const group = m['common.systems.admin']();
   const navItems = [
+    {
+      href: '/admin/analytics',
+      label: m['admin.analytics.title'](),
+      icon: ChartColumn,
+      group,
+    },
     {
       href: '/admin',
       label: m['admin.nav.overview'](),
@@ -72,12 +84,22 @@ function AdminLayout() {
 
   return (
     <AppLayout
-      navItems={navItems}
-      footerNavItems={footerNavItems}
+      navItems={
+        trafficOnly
+          ? navItems.filter((item) => item.href === '/admin/analytics')
+          : navItems
+      }
+      footerNavItems={
+        trafficOnly
+          ? footerNavItems.filter((item) => item.href === '/')
+          : footerNavItems
+      }
       brand={envConfigs.app_name}
-      brandHref="/admin"
+      brandHref={trafficOnly ? '/admin/analytics' : '/admin'}
       profileHref="/settings/profile"
-      requirePermission="admin.*"
+      requirePermission={
+        pathname === '/admin/analytics' ? 'admin.analytics.read' : 'admin.*'
+      }
     >
       <Outlet />
     </AppLayout>

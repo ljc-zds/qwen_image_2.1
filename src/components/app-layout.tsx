@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 import { useSession } from '@/core/auth/client';
+import { matchPermission } from '@/core/auth/rbac';
 import { usePathname, useRouter } from '@/core/i18n/navigation';
 import { apiGet } from '@/lib/api-client';
 import { useUserPermissions } from '@/hooks/use-user-permissions';
@@ -62,7 +63,13 @@ export function AppLayout({
   // Only query permissions once we have a session and a permission gate.
   const permissionsEnabled = !!session?.user && !!requirePermission;
   const permissionsQuery = useUserPermissions(permissionsEnabled);
-  const isAdmin = permissionsQuery.data?.isAdmin === true;
+  const isAdmin =
+    permissionsQuery.data?.isAdmin === true ||
+    (!!requirePermission &&
+      matchPermission(
+        requirePermission,
+        permissionsQuery.data?.permissions || []
+      ));
 
   // Authorization resolution mirrors the original imperative flow:
   // - no permission gate → authorized once a session exists + membership ok

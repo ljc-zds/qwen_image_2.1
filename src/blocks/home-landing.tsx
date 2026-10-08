@@ -17,7 +17,7 @@ import { studioFaqs } from '@/lib/studio-content';
 import { m } from '@/paraglide/messages.js';
 import { getLocale, setLocale } from '@/paraglide/runtime.js';
 import { StudioAccount } from '@/blocks/studio-account';
-import { BuiltWithShipAny } from '@/components/built-with-shipany';
+import { SupportContact } from '@/components/support-contact';
 
 import '@/styles/studio.css';
 import '@/styles/home.css';
@@ -96,33 +96,6 @@ export function HomeLanding() {
       prompt: m['studio.prompt.editorial'](),
     },
   ];
-  const gallery = [
-    {
-      image: '/imgs/original/space-cat-koi.webp',
-      label: m['studio.home.gallery.space'](),
-      href: '/image-generator',
-      alt: m['studio.carousel.product_alt'](),
-    },
-    {
-      image: '/imgs/original/astronaut-otter-sticker.webp',
-      label: m['studio.home.gallery.otter'](),
-      href: '/transparent-png',
-      alt: m['studio.carousel.sticker_alt'](),
-      sticker: true,
-    },
-    {
-      image: '/imgs/original/ramen-miniature-city.webp',
-      label: m['studio.home.gallery.ramen'](),
-      href: '/prompts',
-      alt: m['studio.carousel.editorial_alt'](),
-    },
-    {
-      image: '/imgs/original/perfume-product.webp',
-      label: m['studio.home.gallery.product'](),
-      href: '/image-editor',
-      alt: m['studio.sample_alt'](),
-    },
-  ];
   return (
     <div className="prism-site home-page">
       <a className="prism-skip" href="#tools">
@@ -145,9 +118,6 @@ export function HomeLanding() {
           </Link>
           <Link href="#tools" onClick={() => setMobileOpen(false)}>
             {m['studio.home.nav.tools']()}
-          </Link>
-          <Link href="#inspiration" onClick={() => setMobileOpen(false)}>
-            {m['studio.home.nav.inspiration']()}
           </Link>
           <Link href="/prompts">{m['studio.nav.prompts']()}</Link>
           <Link href="/pricing">{m['studio.pricing.nav']()}</Link>
@@ -241,41 +211,6 @@ export function HomeLanding() {
             ))}
           </div>
         </section>
-        <section className="home-section home-inspiration" id="inspiration">
-          <div className="home-section-heading">
-            <h2>{m['studio.home.inspiration.title']()}</h2>
-            <p>{m['studio.home.inspiration.subtitle']()}</p>
-          </div>
-          <div className="home-gallery">
-            {gallery.map((item) => (
-              <Link
-                className={
-                  'gallery-card ' + (item.sticker ? 'gallery-sticker' : '')
-                }
-                key={item.image}
-                href={item.href}
-              >
-                <img
-                  src={item.image}
-                  alt={item.alt}
-                  width={1024}
-                  height={1024}
-                  loading="lazy"
-                />
-                <span className="gallery-label">
-                  {item.label}
-                  <ArrowRight size={14} />
-                </span>
-              </Link>
-            ))}
-          </div>
-          <div className="home-actions">
-            <Link className="home-secondary" href="/prompts">
-              {m['studio.home.inspiration.more']()}
-              <ArrowRight size={16} />
-            </Link>
-          </div>
-        </section>
         <section className="home-section home-usecases">
           <div className="home-section-heading">
             <h2>{m['studio.home.usecases.title']()}</h2>
@@ -342,6 +277,7 @@ export function HomeLanding() {
               <span>{envConfigs.app_name}</span>
             </Link>
             <p>{m['studio.footer_tagline']()}</p>
+            <SupportContact />
           </div>
           <div className="footer-links">
             {tools.map((tool) => (
@@ -359,7 +295,6 @@ export function HomeLanding() {
             © {new Date().getFullYear()} {envConfigs.app_name}.{' '}
             {m['studio.independent']()}
           </span>
-          <BuiltWithShipAny />
         </div>
       </footer>
     </div>

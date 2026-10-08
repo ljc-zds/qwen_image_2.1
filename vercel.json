@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nitro",
+  "buildCommand": "pnpm build",
+  "installCommand": "pnpm install --frozen-lockfile",
+  "regions": ["iad1"],
+  "crons": [
+    { "path": "/api/payment/retry", "schedule": "0 4 * * *" },
+    { "path": "/api/traffic-cleanup", "schedule": "30 4 * * *" }
+  ]
+}

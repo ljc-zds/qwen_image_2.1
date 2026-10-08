@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useForm } from '@tanstack/react-form';
-import { LoaderCircle, Mail, Sparkles } from 'lucide-react';
+import { Github, LoaderCircle, Mail, Sparkles } from 'lucide-react';
 import { z } from 'zod';
 
 import { authClient, signIn } from '@/core/auth/client';
@@ -33,6 +33,7 @@ export function StudioLogin({
   const configs = config.data ?? {};
   const emailEnabled = configs.email_auth_enabled !== 'false';
   const googleEnabled = configs.google_auth_enabled === 'true';
+  const githubEnabled = configs.github_auth_enabled === 'true';
   const form = useForm({
     defaultValues: { email: '', password: '' },
     validators: {
@@ -91,13 +92,13 @@ export function StudioLogin({
     }
   }
 
-  async function google() {
+  async function social(provider: 'google' | 'github') {
     setError('');
     setSocialPending(true);
     try {
       await beforeNavigate();
       const result = await signIn.social({
-        provider: 'google',
+        provider,
         callbackURL: localizeHref(currentPathWithQuery()),
       });
       if (result.error) {
@@ -150,7 +151,7 @@ export function StudioLogin({
                 type="button"
                 className="studio-google-button"
                 disabled={socialPending}
-                onClick={() => void google()}
+                onClick={() => void social('google')}
               >
                 {socialPending ? (
                   <LoaderCircle size={17} className="spin" />
@@ -160,7 +161,22 @@ export function StudioLogin({
                 {m['common.sign.google_sign_in']()}
               </button>
             )}
-            {googleEnabled && emailEnabled && (
+            {githubEnabled && (
+              <button
+                type="button"
+                className="studio-google-button"
+                disabled={socialPending}
+                onClick={() => void social('github')}
+              >
+                {socialPending ? (
+                  <LoaderCircle size={17} className="spin" />
+                ) : (
+                  <Github size={18} aria-hidden="true" />
+                )}
+                {m['common.sign.github_sign_in']()}
+              </button>
+            )}
+            {(googleEnabled || githubEnabled) && emailEnabled && (
               <div className="studio-login-divider">
                 {m['common.sign.or']()}
               </div>
@@ -245,7 +261,7 @@ export function StudioLogin({
                 </p>
               </form>
             )}
-            {!emailEnabled && !googleEnabled && (
+            {!emailEnabled && !googleEnabled && !githubEnabled && (
               <p>{m['common.sign.no_methods_description']()}</p>
             )}
           </>

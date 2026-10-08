@@ -326,61 +326,6 @@
   max-width: 520px;
 }
 
-.home-inspiration {
-  border-top: 1px solid #f0ebf6;
-}
-
-.home-gallery {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 20px;
-}
-
-.gallery-card {
-  position: relative;
-  overflow: hidden;
-  border-radius: 5px;
-  background: #f3e8ff;
-  aspect-ratio: 4 / 5;
-  transition:
-    transform 200ms,
-    box-shadow 200ms;
-}
-
-.gallery-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 28px #25143218;
-}
-
-.gallery-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.gallery-sticker img {
-  object-fit: contain;
-  padding: 18px;
-}
-
-.gallery-label {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  position: absolute;
-  left: 12px;
-  top: 12px;
-  max-width: calc(100% - 24px);
-  padding: 5px 10px;
-  background: #fffffff2;
-  border-radius: 3px;
-  color: #334155;
-  font-size: 12px;
-  font-weight: 600;
-  box-shadow: 0 2px 8px #0000000a;
-}
-
 .home-usecases {
   padding-top: 40px;
 }
@@ -510,10 +455,6 @@
     max-width: none;
   }
 
-  .home-gallery {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .home-usecase-grid {
     gap: 16px;
   }
@@ -641,18 +582,6 @@
     margin-bottom: 20px;
   }
 
-  .home-gallery {
-    gap: 12px;
-  }
-
-  .gallery-label {
-    left: 8px;
-    top: 8px;
-    max-width: calc(100% - 16px);
-    font-size: 11px;
-    padding: 4px 7px;
-  }
-
   .home-usecase-grid {
     grid-template-columns: 1fr;
   }
@@ -672,10 +601,6 @@
 
 @media (max-width: 340px) {
   .home-tool-grid,
-  .home-gallery {
-    grid-template-columns: 1fr;
-  }
-
   .home-page a.home-tool-card {
     min-height: auto;
   }

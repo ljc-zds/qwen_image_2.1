@@ -5,6 +5,7 @@ import { ArrowLeft } from 'lucide-react';
 import { Link } from '@/core/i18n/navigation';
 import { m } from '@/paraglide/messages.js';
 import { mdxComponents } from '@/components/mdx-components';
+import { SupportContact } from '@/components/support-contact';
 
 export const Route = createFileRoute('/(pages)')({
   component: PagesLayout,
@@ -26,6 +27,9 @@ function PagesLayout() {
         <MDXProvider components={mdxComponents}>
           <Outlet />
         </MDXProvider>
+        <footer className="mt-10 border-t pt-6">
+          <SupportContact />
+        </footer>
       </div>
     </div>
   );

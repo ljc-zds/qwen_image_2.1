@@ -2,6 +2,7 @@ import { createFileRoute } from '@tanstack/react-router';
 
 import { getAuth } from '@/core/auth';
 import { getDbConfigs } from '@/modules/config/service';
+import { consume, revoke } from '@/modules/credits/service';
 import {
   createStudioImage,
   isStudioReady,
@@ -51,9 +52,23 @@ export const Route = createFileRoute('/api/studio/generate')({
           if (now - time > 300_000) recentUsers.delete(id);
         recentUsers.set(userId, now);
         activeUsers.add(userId);
+        let reservedCreditId: string | undefined;
         try {
+          if (process.env.STUDIO_REQUIRE_CREDITS !== 'false') {
+            const reserved = await consume({
+              userId,
+              userEmail: session.user.email,
+              credits: 1,
+              scene: 'studio',
+              description: 'Qwen Image 2.1 image generation',
+            });
+            if (!reserved.success)
+              return respErr('insufficient_credits', { status: 402 });
+            reservedCreditId = reserved.consumedCredit.id;
+          }
           return respData(await createStudioImage(input));
         } catch {
+          if (reservedCreditId) await revoke(reservedCreditId);
           return respErr('generation_failed', { status: 502 });
         } finally {
           activeUsers.delete(userId);

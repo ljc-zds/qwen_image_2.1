@@ -55,6 +55,12 @@ function validCreditConditions(userId: string) {
     eq(credit.transactionType, CreditTransactionType.GRANT),
     eq(credit.status, CreditStatus.ACTIVE),
     gt(credit.remainingCredits, 0),
+    process.env.WAFFO_ENVIRONMENT === 'prod'
+      ? or(
+          isNull(credit.metadata),
+          sql`${credit.metadata} NOT LIKE ${'%"mode":"test"%'}`
+        )
+      : undefined,
     or(isNull(credit.expiresAt), gt(credit.expiresAt, now))
   );
 }
@@ -129,15 +135,7 @@ export async function consume(params: {
     const [balance] = await tx
       .select({ total: sum(credit.remainingCredits) })
       .from(credit)
-      .where(
-        and(
-          eq(credit.userId, userId),
-          eq(credit.transactionType, CreditTransactionType.GRANT),
-          eq(credit.status, CreditStatus.ACTIVE),
-          gt(credit.remainingCredits, 0),
-          or(isNull(credit.expiresAt), gt(credit.expiresAt, now))
-        )
-      );
+      .where(validCreditConditions(userId));
 
     if (!balance?.total || parseInt(balance.total) < amount) {
       return { success: false };
@@ -154,15 +152,7 @@ export async function consume(params: {
       const batchCredits = await tx
         .select()
         .from(credit)
-        .where(
-          and(
-            eq(credit.userId, userId),
-            eq(credit.transactionType, CreditTransactionType.GRANT),
-            eq(credit.status, CreditStatus.ACTIVE),
-            gt(credit.remainingCredits, 0),
-            or(isNull(credit.expiresAt), gt(credit.expiresAt, now))
-          )
-        )
+        .where(validCreditConditions(userId))
         .orderBy(asc(credit.expiresAt))
         .limit(batchSize)
         .for('update');
@@ -192,6 +182,10 @@ export async function consume(params: {
       batchNo++;
     }
 
+    // A concurrent transaction may have spent the balance before our row locks.
+    // Throw to roll back every partial deduction instead of granting a free task.
+    if (remainingToConsume > 0) throw new Error('insufficient_credits');
+
     // 3. Create consumption record
     const consumedCredit: NewCredit = {
       id: getUuid(),
@@ -213,29 +207,36 @@ export async function consume(params: {
   };
 
   if (tx) return execute(tx);
-  return db().transaction(execute);
+  try {
+    return await db().transaction(execute);
+  } catch (error) {
+    if (error instanceof Error && error.message === 'insufficient_credits')
+      return { success: false };
+    throw error;
+  }
 }
 
 // --- Revoke (restore credits from a consumed record) ---
 
 export async function revoke(consumeCreditId: string) {
-  const [consumeRecord] = await db()
-    .select()
-    .from(credit)
-    .where(
-      and(
-        eq(credit.id, consumeCreditId),
-        eq(credit.transactionType, CreditTransactionType.CONSUME),
-        eq(credit.status, CreditStatus.ACTIVE)
-      )
-    )
-    .limit(1);
-
-  if (!consumeRecord || !consumeRecord.consumedDetail) return;
-
-  const items = JSON.parse(consumeRecord.consumedDetail);
-
   await db().transaction(async (tx: any) => {
+    const [consumeRecord] = await tx
+      .select()
+      .from(credit)
+      .where(
+        and(
+          eq(credit.id, consumeCreditId),
+          eq(credit.transactionType, CreditTransactionType.CONSUME),
+          eq(credit.status, CreditStatus.ACTIVE)
+        )
+      )
+      .limit(1)
+      .for('update');
+
+    if (!consumeRecord || !consumeRecord.consumedDetail) return;
+
+    const items = JSON.parse(consumeRecord.consumedDetail);
+
     // Atomic increment per source grant — no read-modify-write race.
     for (const item of items) {
       await tx
