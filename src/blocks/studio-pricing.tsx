@@ -55,6 +55,8 @@ export function StudioPricing() {
     { href: '/transparent-png', label: m['studio.nav.png']() },
     { href: '/image-editor', label: m['studio.nav.edit']() },
     { href: '/prompts', label: m['studio.nav.prompts']() },
+    { href: '/my-creations', label: m['gallery.title']() },
+    { href: '/blog', label: m['blog.title']() },
     { href: '/pricing', label: m['studio.pricing.nav']() },
   ];
   const common = [
@@ -70,7 +72,7 @@ export function StudioPricing() {
       copy: m['studio.pricing.free.copy'](),
       price: 0,
       annual: 0,
-      credits: 3,
+      credits: 1,
       features: [
         m['studio.pricing.library'](),
         m['studio.pricing.copy'](),

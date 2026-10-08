@@ -1,0 +1,221 @@
+.gallery-page {
+  min-height: 100vh;
+  background: #fafbfc;
+}
+.gallery-main {
+  max-width: 1280px;
+  margin: auto;
+  padding: 52px 32px 80px;
+}
+.gallery-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 36px;
+}
+.gallery-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #64748b;
+}
+.gallery-heading h1 {
+  font-size: 38px;
+  letter-spacing: -1.2px;
+  margin: 8px 0 12px;
+}
+.gallery-heading p {
+  font-size: 15px;
+  color: #64748b;
+}
+.gallery-create {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 18px;
+  border-radius: 10px;
+  background: var(--primary);
+  color: white !important;
+  font-size: 14px;
+  font-weight: 600;
+  border: 0;
+  cursor: pointer;
+}
+.gallery-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e2e8f0;
+  margin-bottom: 28px;
+  padding: 0 0 16px;
+}
+.gallery-toolbar strong {
+  font-size: 14px;
+}
+.gallery-toolbar span {
+  font-size: 12px;
+  color: #64748b;
+}
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+}
+.gallery-card {
+  border: 1px solid #e9edf2;
+  border-radius: 14px;
+  background: white;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+.gallery-card:hover {
+  box-shadow: 0 8px 24px #0f172a0c;
+}
+.gallery-image {
+  width: 100%;
+  padding: 0;
+  position: relative;
+  display: block;
+  border: 0;
+  cursor: pointer;
+  background: repeating-conic-gradient(#f3f4f6 0% 25%, white 0% 50%) 50%/16px
+    16px;
+}
+.gallery-image img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
+  display: block;
+}
+.gallery-image > span {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  right: 12px;
+  background: #ffffffeb;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.gallery-image:hover > span,
+.gallery-image:focus-visible > span {
+  opacity: 1;
+}
+.gallery-caption {
+  padding: 15px;
+}
+.gallery-caption p {
+  font-size: 13px;
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 42px;
+  margin: 0 0 14px;
+}
+.gallery-caption > div {
+  display: flex;
+  justify-content: space-between;
+  color: #64748b;
+  font-size: 11px;
+  align-items: center;
+}
+.gallery-caption a {
+  padding: 6px;
+  color: #334155;
+}
+.gallery-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 18px;
+  min-height: 340px;
+  padding: 40px 24px;
+  color: #64748b;
+}
+.gallery-state h2 {
+  color: #0f172a;
+  font-size: 23px;
+  margin: 0;
+}
+.gallery-state p {
+  max-width: 420px;
+  line-height: 1.7;
+}
+.gallery-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 22px;
+  margin-top: 36px;
+}
+.gallery-pagination button {
+  padding: 10px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: white;
+}
+.gallery-pagination button:disabled {
+  opacity: 0.4;
+}
+.gallery-detail {
+  max-width: 760px !important;
+  max-height: 90vh;
+  overflow: auto;
+}
+.gallery-detail > img {
+  width: 100%;
+  max-height: 55vh;
+  object-fit: contain;
+  border-radius: 10px;
+}
+.gallery-detail .gallery-create {
+  justify-self: start;
+}
+@media (max-width: 1100px) {
+  .gallery-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 760px) {
+  .gallery-main {
+    padding: 32px 20px 60px;
+  }
+  .gallery-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .gallery-heading h1 {
+    font-size: 30px;
+  }
+  .gallery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+  .gallery-toolbar {
+    gap: 20px;
+  }
+  .gallery-toolbar span {
+    max-width: 180px;
+    text-align: right;
+  }
+  .gallery-caption {
+    padding: 12px;
+  }
+}
+@media (max-width: 400px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+}

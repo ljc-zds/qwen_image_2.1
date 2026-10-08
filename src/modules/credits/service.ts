@@ -353,17 +353,17 @@ export async function claimStudioTrial(userId: string) {
         transactionNo,
         transactionType: 'grant',
         transactionScene: 'studio_trial',
-        credits: 3,
-        remainingCredits: 3,
+        credits: 1,
+        remainingCredits: 1,
         status: 'active',
-        description: '3 free welcome image credits',
+        description: '1 free welcome image credit',
         metadata: JSON.stringify({
           mode: process.env.WAFFO_ENVIRONMENT || 'test',
           trial: true,
         }),
       })
       .onConflictDoNothing();
-    return { eligible: true, remaining: 3 };
+    return { eligible: true, remaining: 1 };
   });
 }
 export async function getStudioTrialRemaining(userId: string) {

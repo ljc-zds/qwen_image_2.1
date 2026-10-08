@@ -288,6 +288,8 @@ export function StudioPage({ page }: { page: StudioPageKind }) {
             {m['studio.nav.prompts']()}
           </Link>
           <Link href="/pricing">{m['studio.pricing.nav']()}</Link>
+          <Link href="/my-creations">{m['gallery.title']()}</Link>
+          <Link href="/blog">{m['blog.title']()}</Link>
         </nav>
         <div className="prism-header-actions">
           <button
@@ -610,7 +612,7 @@ export function StudioPage({ page }: { page: StudioPageKind }) {
                     : m['studio.trial.generate']()}
                   <ArrowRight size={16} />
                 </button>
-                <Link href="/settings/gallery">{m['gallery.title']()} →</Link>
+                <Link href="/my-creations">{m['gallery.title']()} →</Link>
                 <p className="service-note">
                   {!session?.user
                     ? m['studio.trial.invite']()

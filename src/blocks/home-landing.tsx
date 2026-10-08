@@ -121,6 +121,8 @@ export function HomeLanding() {
           </Link>
           <Link href="/prompts">{m['studio.nav.prompts']()}</Link>
           <Link href="/pricing">{m['studio.pricing.nav']()}</Link>
+          <Link href="/my-creations">{m['gallery.title']()}</Link>
+          <Link href="/blog">{m['blog.title']()}</Link>
         </nav>
         <div className="prism-header-actions">
           <button

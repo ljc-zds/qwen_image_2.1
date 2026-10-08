@@ -12,8 +12,8 @@ import { baseLocale } from '@/paraglide/runtime.js';
  * local posts via the pure helpers below.
  */
 export const BLOG_POST_SLUGS = [
-  'what-is-shipany',
-  'blocks-vs-components',
+  'first-image-guide',
+  'transparent-png-guide',
 ] as const;
 
 export type BlogPostMeta = {

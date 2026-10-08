@@ -9,6 +9,8 @@ export function Header() {
         { href: '/transparent-png', label: m['studio.nav.png']() },
         { href: '/image-editor', label: m['studio.nav.edit']() },
         { href: '/prompts', label: m['studio.nav.prompts']() },
+        { href: '/my-creations', label: m['gallery.title']() },
+        { href: '/blog', label: m['blog.title']() },
       ]}
     />
   );

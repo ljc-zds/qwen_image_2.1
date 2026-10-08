@@ -3,7 +3,6 @@ import {
   Coins,
   CreditCard,
   Home,
-  Image,
   Key,
   LayoutDashboard,
   LifeBuoy,
@@ -23,12 +22,6 @@ export const Route = createFileRoute('/settings')({
 function SettingsLayout() {
   const group = m['common.systems.settings']();
   const navItems = [
-    {
-      href: '/settings/gallery',
-      label: m['gallery.title'](),
-      icon: Image,
-      group,
-    },
     {
       href: '/settings',
       label: m['settings.nav.overview'](),
