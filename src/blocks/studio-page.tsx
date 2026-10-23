@@ -42,7 +42,13 @@ type Mode = 'generate' | 'edit' | 'transparent';
 type Result = { url: string; transparent: boolean };
 const promptSchema = z.object({ prompt: z.string().trim().min(5).max(2000) });
 
-export function StudioPage({ page }: { page: StudioPageKind }) {
+export function StudioPage({
+  page,
+  homepage = false,
+}: {
+  page: StudioPageKind;
+  homepage?: boolean;
+}) {
   const location = useLocation();
   const queryClient = useQueryClient();
   const [mode, setMode] = useState<Mode>(
@@ -197,7 +203,7 @@ export function StudioPage({ page }: { page: StudioPageKind }) {
   }
   function usePrompt(prompt: string, target: Mode = 'generate') {
     form.setFieldValue('prompt', prompt);
-    setMode(target);
+    setMode(mode === 'edit' ? 'edit' : target);
     setFeedback('');
     document
       .getElementById('workspace')
@@ -227,6 +233,23 @@ export function StudioPage({ page }: { page: StudioPageKind }) {
       className: 'sample-editorial',
       image: '/imgs/original/ramen-miniature-city.webp',
       alt: m['studio.carousel.editorial_alt'](),
+    },
+  ];
+  const editIdeas = [
+    {
+      label: m['studio.edit.background'](),
+      prompt: m['studio.edit.background_prompt'](),
+      mode: 'edit' as Mode,
+    },
+    {
+      label: m['studio.edit.light'](),
+      prompt: m['studio.edit.light_prompt'](),
+      mode: 'edit' as Mode,
+    },
+    {
+      label: m['studio.edit.subject'](),
+      prompt: m['studio.edit.subject_prompt'](),
+      mode: 'edit' as Mode,
     },
   ];
   const heading =
@@ -315,21 +338,26 @@ export function StudioPage({ page }: { page: StudioPageKind }) {
         beforeNavigate={preserveDraft}
       />
       <main>
-        <nav className="prism-breadcrumb" aria-label={m['studio.breadcrumb']()}>
-          <Link href="/">{m['studio.home']()}</Link>
-          <span>›</span>
-          <span>{m['studio.workspace']()}</span>
-          <span>›</span>
-          <strong>
-            {page === 'transparent'
-              ? m['studio.nav.png']()
-              : page === 'editor'
-                ? m['studio.nav.edit']()
-                : page === 'prompts'
-                  ? m['studio.nav.prompts']()
-                  : m['studio.nav.create']()}
-          </strong>
-        </nav>
+        {!homepage && (
+          <nav
+            className="prism-breadcrumb"
+            aria-label={m['studio.breadcrumb']()}
+          >
+            <Link href="/">{m['studio.home']()}</Link>
+            <span>›</span>
+            <span>{m['studio.workspace']()}</span>
+            <span>›</span>
+            <strong>
+              {page === 'transparent'
+                ? m['studio.nav.png']()
+                : page === 'editor'
+                  ? m['studio.nav.edit']()
+                  : page === 'prompts'
+                    ? m['studio.nav.prompts']()
+                    : m['studio.nav.create']()}
+            </strong>
+          </nav>
+        )}
         <section className="prism-hero">
           <h1>{heading}</h1>
           <p>{subtitle}</p>
@@ -532,23 +560,26 @@ export function StudioPage({ page }: { page: StudioPageKind }) {
                 </form.Field>
                 <div className="quick-ideas">
                   <span>{m['studio.quick.label']()}</span>
-                  {[
-                    {
-                      label: m['studio.quick.space'](),
-                      prompt: m['studio.prompt.product'](),
-                      mode: 'generate' as Mode,
-                    },
-                    {
-                      label: m['studio.quick.city'](),
-                      prompt: m['studio.prompt.editorial'](),
-                      mode: 'generate' as Mode,
-                    },
-                    {
-                      label: m['studio.quick.sticker'](),
-                      prompt: m['studio.prompt.sticker'](),
-                      mode: 'transparent' as Mode,
-                    },
-                  ].map((idea) => (
+                  {(mode === 'edit'
+                    ? editIdeas
+                    : [
+                        {
+                          label: m['studio.quick.space'](),
+                          prompt: m['studio.prompt.product'](),
+                          mode: 'generate' as Mode,
+                        },
+                        {
+                          label: m['studio.quick.city'](),
+                          prompt: m['studio.prompt.editorial'](),
+                          mode: 'generate' as Mode,
+                        },
+                        {
+                          label: m['studio.quick.sticker'](),
+                          prompt: m['studio.prompt.sticker'](),
+                          mode: 'transparent' as Mode,
+                        },
+                      ]
+                  ).map((idea) => (
                     <button
                       key={idea.label}
                       type="button"
@@ -729,29 +760,19 @@ export function StudioPage({ page }: { page: StudioPageKind }) {
                 </>
               ) : (
                 <PreviewCarousel
+                  key={mode === 'edit' ? 'edit' : 'create'}
                   label={m['studio.carousel.label']()}
                   sampleLabel={m['studio.sample']()}
                   disclaimer={m['studio.carousel.disclaimer']()}
                   dotLabel={(index) => m['studio.carousel.dot']({ index })}
                   onSelect={(prompt, mode) => usePrompt(prompt, mode)}
-                  slides={[
-                    {
-                      image: '/imgs/original/space-cat-koi.webp',
-                      alt: m['studio.carousel.product_alt'](),
-                      prompt: m['studio.prompt.product'](),
-                    },
-                    {
-                      image: '/imgs/original/astronaut-otter-sticker.webp',
-                      mode: 'transparent',
-                      alt: m['studio.carousel.sticker_alt'](),
-                      prompt: m['studio.prompt.sticker'](),
-                    },
-                    {
-                      image: '/imgs/original/ramen-miniature-city.webp',
-                      alt: m['studio.carousel.editorial_alt'](),
-                      prompt: m['studio.prompt.editorial'](),
-                    },
-                  ]}
+                  slides={examples.map((item, index) => ({
+                    image: item.image,
+                    alt: item.alt,
+                    prompt:
+                      mode === 'edit' ? editIdeas[index].prompt : item.prompt,
+                    mode: mode === 'edit' ? 'edit' : item.mode,
+                  }))}
                 />
               )}
               {generation.isPending && (
@@ -791,7 +812,13 @@ export function StudioPage({ page }: { page: StudioPageKind }) {
               </Link>
             </div>
             <div className="example-grid">
-              {examples.map((example) => (
+              {(mode === 'edit'
+                ? editIdeas.map((idea, index) => ({
+                    ...examples[index],
+                    ...idea,
+                  }))
+                : examples
+              ).map((example) => (
                 <button
                   className="example-card"
                   key={example.label}

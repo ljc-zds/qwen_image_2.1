@@ -526,3 +526,31 @@
     flex-direction: column;
   }
 }
+
+.pricing-choice-guide {
+  text-align: center;
+  color: #64748b;
+  margin: 0 0 24px;
+  line-height: 1.7;
+}
+.pricing-free-amount {
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+.pricing-free-amount strong {
+  font-size: 32px;
+  line-height: 1.2;
+}
+.pricing-free-amount span {
+  font-size: 18px;
+}
+.pricing-validity,
+.pricing-unit {
+  font-size: 13px;
+  color: #64748b;
+  line-height: 1.65;
+  margin: 8px 0;
+}

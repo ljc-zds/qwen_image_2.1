@@ -1,8 +1,19 @@
 import { createHash } from 'node:crypto';
-import { and, asc, desc, eq, gt, isNull, or, sql, sum } from 'drizzle-orm';
+import {
+  and,
+  asc,
+  desc,
+  eq,
+  gt,
+  inArray,
+  isNull,
+  or,
+  sql,
+  sum,
+} from 'drizzle-orm';
 
 import { db } from '@/core/db';
-import { credit, user } from '@/config/db/schema';
+import { account as authAccount, credit, user } from '@/config/db/schema';
 import { getSnowId, getUuid } from '@/lib/hash';
 
 // --- Enums ---
@@ -56,6 +67,12 @@ function validCreditConditions(userId: string) {
     eq(credit.transactionType, CreditTransactionType.GRANT),
     eq(credit.status, CreditStatus.ACTIVE),
     gt(credit.remainingCredits, 0),
+    // Previously granted email-only trials cannot be spent; paid credits stay valid.
+    or(
+      isNull(credit.transactionScene),
+      sql`${credit.transactionScene} <> ${'studio_trial'}`,
+      sql`exists (select 1 from ${authAccount} where ${authAccount.userId} = ${userId} and ${authAccount.providerId} in (${'google'}, ${'github'}))`
+    ),
     process.env.WAFFO_ENVIRONMENT === 'prod'
       ? or(
           isNull(credit.metadata),
@@ -298,7 +315,7 @@ export async function getHistory(userId: string, limit = 50) {
     .limit(limit);
 }
 
-// Verified accounts receive a lifetime trial once. Email-derived unique keys
+// Google/GitHub accounts receive a lifetime trial once. Email-derived unique keys
 // deduplicate repeat and concurrent claims for the same email.
 const trialKey = (email: string) =>
   'studio_trial_' +
@@ -314,7 +331,18 @@ export async function claimStudioTrial(userId: string) {
       .from(user)
       .where(eq(user.id, userId))
       .limit(1);
-    if (!account?.emailVerified) return { eligible: false, remaining: 0 };
+    if (!account) return { eligible: false, remaining: 0 };
+    const [socialAccount] = await tx
+      .select({ id: authAccount.id })
+      .from(authAccount)
+      .where(
+        and(
+          eq(authAccount.userId, userId),
+          inArray(authAccount.providerId, ['google', 'github'])
+        )
+      )
+      .limit(1);
+    if (!socialAccount) return { eligible: false, remaining: 0 };
     const transactionNo = trialKey(account.email);
     const [existing] = await tx
       .select()

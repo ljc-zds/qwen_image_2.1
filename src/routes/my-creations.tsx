@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { createFileRoute } from '@tanstack/react-router';
-import { ArrowRight, Download, ImagePlus, Menu, X } from 'lucide-react';
+import { ArrowRight, Download, ImagePlus, Menu, Trash2, X } from 'lucide-react';
 
 import { useSession } from '@/core/auth/client';
 import { Link } from '@/core/i18n/navigation';
 import { envConfigs } from '@/config';
-import { apiGet } from '@/lib/api-client';
+import { apiDelete, apiGet } from '@/lib/api-client';
 import { m } from '@/paraglide/messages.js';
 import { getLocale, setLocale } from '@/paraglide/runtime.js';
 import { StudioAccount } from '@/blocks/studio-account';
@@ -27,6 +27,18 @@ function CreationsPage() {
     [mobile, setMobile] = useState(false),
     [login, setLogin] = useState(false),
     [selected, setSelected] = useState<Artwork | null>(null);
+  const [deleting, setDeleting] = useState<Artwork | null>(null);
+  const queryClient = useQueryClient();
+  const deletion = useMutation({
+    mutationFn: (id: string) =>
+      apiDelete(`/api/gallery/${encodeURIComponent(id)}`),
+    onSuccess: (_, id) => {
+      setDeleting(null);
+      setSelected((current) => (current?.id === id ? null : current));
+      setPage(1);
+      queryClient.invalidateQueries({ queryKey: ['gallery'] });
+    },
+  });
   const { data: session, isPending: sessionLoading } = useSession();
   const query = useQuery({
     queryKey: ['gallery', session?.user?.id, page],
@@ -153,6 +165,17 @@ function CreationsPage() {
                         getLocale() === 'zh' ? 'zh-CN' : 'en-US'
                       )}
                     </time>
+                    <button
+                      type="button"
+                      className="gallery-delete"
+                      aria-label={m['gallery.delete']()}
+                      onClick={() => {
+                        deletion.reset();
+                        setDeleting(item);
+                      }}
+                    >
+                      <Trash2 size={17} />
+                    </button>
                     <a
                       href={`${item.url}?download=1`}
                       aria-label={m['gallery.download']()}
@@ -199,6 +222,37 @@ function CreationsPage() {
               </a>
             </>
           )}
+        </DialogContent>
+      </Dialog>
+      <Dialog
+        open={Boolean(deleting)}
+        onOpenChange={(open) => {
+          if (!open && !deletion.isPending) setDeleting(null);
+        }}
+      >
+        <DialogContent>
+          <DialogTitle>{m['gallery.delete_title']()}</DialogTitle>
+          <DialogDescription>{m['gallery.delete_copy']()}</DialogDescription>
+          {deletion.isError && (
+            <p role="alert">{m['gallery.delete_failed']()}</p>
+          )}
+          <button
+            type="button"
+            disabled={deletion.isPending}
+            onClick={() => setDeleting(null)}
+          >
+            {m['gallery.cancel']()}
+          </button>
+          <button
+            type="button"
+            className="gallery-delete-confirm"
+            disabled={deletion.isPending}
+            onClick={() => deleting && deletion.mutate(deleting.id)}
+          >
+            {deletion.isPending
+              ? m['gallery.deleting']()
+              : m['gallery.delete']()}
+          </button>
         </DialogContent>
       </Dialog>
       <StudioLogin open={login} onOpenChange={setLogin} />

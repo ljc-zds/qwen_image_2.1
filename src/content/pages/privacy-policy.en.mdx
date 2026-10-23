@@ -1,7 +1,7 @@
 export const meta = {
   title: 'Privacy Policy',
   description: 'How we collect, use, and protect your personal information.',
-  updated_at: '2026-10-07',
+  updated_at: '2026-10-23',
 };
 
 ## Introduction
@@ -51,6 +51,14 @@ We may update this Privacy Policy from time to time. We will notify you of any m
 ## First-party traffic analytics
 
 We record public page paths, visit times, and a keyed hash of a random browser identifier to estimate unique visitors and page views. The identifier is stored in browser local storage for 90 days. This analytics dataset does not store IP addresses, full referring URLs, or link visits to your account. Records older than 90 days are removed by a daily cleanup. We skip collection when your browser signals Do Not Track or Global Privacy Control, or when local storage is unavailable. Clearing local storage resets the identifier. Reports are restricted to administrators.
+
+## Images, prompts and retention
+
+- Selecting a reference loads it into your browser. Submitting a task sends the prompt and reference to Alibaba Cloud Bailian for inference. Our application does not save reference files in the artwork bucket.
+- To restore work after sign-in, a draft (including a reference, if selected) can be saved in this browser's IndexedDB. Drafts are restored once and rejected after two hours; expired bytes are not automatically erased until the draft is read or browser site data is cleared. On a shared device, clear site data after use.
+- When artwork storage is available, generated PNGs are saved in a private Cloudflare R2 bucket; prompts, generation options and artwork identifiers are stored in our database. Download routes check the signed-in owner. Your private artwork is not published as a public example without permission.
+- Saved artwork has no automatic expiry. In My creations, you can permanently delete an artwork and its prompt after confirmation. This removes the R2 object and clears the artwork content from the database; a minimal deletion record and payment/credit history remain for accounting and abuse prevention. Downloaded copies and provider systems or backups are not removed by this action. Contact support below for account deletion or other data requests. We normally acknowledge requests within two business days; this is not a guaranteed deletion deadline. Deletion from a provider's systems or backups may follow that provider's rules.
+- This application does not implement a model-training pipeline using your images or prompts. This does not guarantee the inference provider's retention or training practices: Alibaba Cloud's applicable service terms, region and account settings govern its processing. We have not independently verified a zero-retention or no-training guarantee. Avoid uploading confidential client or sensitive personal material unless those terms meet your needs.
 
 ## Contact Us
 

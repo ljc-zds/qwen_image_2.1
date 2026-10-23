@@ -127,3 +127,45 @@ export async function readArtwork(userId: string, id: string) {
   if (!response.ok) throw new Error('gallery_download_failed');
   return response;
 }
+
+// Remove the private object before scrubbing its record. If storage fails, keep
+// the record available for an explicit retry rather than reporting false success.
+export async function deleteArtwork(userId: string, id: string) {
+  const [item] = await db()
+    .select()
+    .from(aiTask)
+    .where(
+      and(
+        eq(aiTask.id, id),
+        eq(aiTask.userId, userId),
+        eq(aiTask.scene, 'studio_gallery')
+      )
+    )
+    .limit(1);
+  if (!item) return false;
+  if (item.deletedAt) return true;
+  const { key } = JSON.parse(item.taskResult || '{}');
+  if (typeof key !== 'string' || !/^artworks\/[a-zA-Z0-9-]+\.png$/.test(key))
+    throw new Error('invalid_gallery_key');
+  const s = storage();
+  const response = await s.client.fetch(s.endpoint + key, { method: 'DELETE' });
+  if (!response.ok && response.status !== 404)
+    throw new Error('gallery_delete_failed');
+  await db()
+    .update(aiTask)
+    .set({
+      deletedAt: new Date(),
+      prompt: '',
+      options: null,
+      taskInfo: null,
+      taskResult: null,
+    })
+    .where(
+      and(
+        eq(aiTask.id, id),
+        eq(aiTask.userId, userId),
+        eq(aiTask.scene, 'studio_gallery')
+      )
+    );
+  return true;
+}

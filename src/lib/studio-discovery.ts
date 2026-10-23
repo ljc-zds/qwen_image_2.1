@@ -18,9 +18,12 @@ export function studioDiscovery(full: boolean) {
     '- [Image editor](' + base + '/image-editor): Reference-based editing.',
     '- [Prompt library](' + base + '/prompts): Reusable creative prompts.',
     '',
+    '- [Privacy](' +
+      base +
+      '/privacy-policy): Reference handling, private artwork retention and deletion requests.',
     '## Availability',
-    'This site is a preview until an inference bridge is configured. Preview artwork is illustrative, not Qwen model output.',
-    'Prism Studio is independent and not affiliated with Qwen.',
+    'Sign in to generate images with credits. Google/GitHub accounts can claim one free image once, subject to daily availability. The gallery contains original creative illustrations and is not a Qwen model benchmark.',
+    'Prism Studio at qwenimage2.site is an independent third-party workspace, not affiliated with Qwen. The domain is not an official model version.',
   ];
   if (full)
     lines.push(

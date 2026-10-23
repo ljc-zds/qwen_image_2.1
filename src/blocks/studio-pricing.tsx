@@ -198,10 +198,14 @@ export function StudioPricing() {
           id="plans"
           aria-label={m['studio.pricing.nav']()}
         >
+          <p className="pricing-choice-guide">
+            {m['studio.pricing.choice_guide']()}
+          </p>
           <div className="pricing-pack-offer">
             <div>
               <strong>{m['studio.payment.pack']()}</strong>
               <p>{m['studio.payment.pack_copy']()}</p>
+              <p>{m['studio.pricing.pack_value']()}</p>
             </div>
             <button
               className="pricing-plan-cta"
@@ -235,11 +239,30 @@ export function StudioPricing() {
                 </span>
                 <h2>{plan.name}</h2>
                 <p className="pricing-plan-copy">{plan.copy}</p>
-                <div className="pricing-amount">
-                  <span>$</span>
-                  <strong>{plan.price}</strong>
-                  <small>{m['studio.pricing.per_month']()}</small>
-                </div>
+                {plan.id === 'free' ? (
+                  <div className="pricing-free-amount">
+                    <strong>{m['studio.pricing.free_heading']()}</strong>
+                    <span>{m['studio.pricing.free_once']()}</span>
+                  </div>
+                ) : (
+                  <div className="pricing-amount">
+                    <span>$</span>
+                    <strong>{plan.price}</strong>
+                    <small>{m['studio.pricing.per_month']()}</small>
+                  </div>
+                )}
+                <p className="pricing-validity">
+                  {plan.id === 'free'
+                    ? m['studio.pricing.free_availability']()
+                    : m['studio.pricing.subscription_validity']()}
+                </p>
+                {plan.id !== 'free' && (
+                  <p className="pricing-unit">
+                    {m['studio.pricing.unit_price']({
+                      amount: (plan.price / plan.credits).toFixed(3),
+                    })}
+                  </p>
+                )}
                 <p className="pricing-billing-note">
                   {plan.id === 'free'
                     ? m['studio.pricing.free_note']()

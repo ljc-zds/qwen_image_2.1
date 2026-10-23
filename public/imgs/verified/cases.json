@@ -1,0 +1,48 @@
+[
+  {
+    "id": "generate",
+    "mode": "generate",
+    "prompt": "A small cream ceramic vase with three pale lavender tulips on a light oak table, soft morning window light, warm ivory wall, realistic product photography, clean minimal composition, no text, no watermark.",
+    "path": "/imgs/verified/generate.png",
+    "model": "qwen-image-2.1-pro",
+    "provider": "Alibaba Cloud Bailian",
+    "generatedAt": "2026-10-23T08:24:01.247Z",
+    "durationSeconds": 8.6,
+    "width": 1024,
+    "height": 1024,
+    "transparent": true,
+    "preview": "/imgs/verified/generate.webp",
+    "submittedPrompt": "A small cream ceramic vase with three pale lavender tulips on a light oak table, soft morning window light, warm ivory wall, realistic product photography, clean minimal composition, no text, no watermark."
+  },
+  {
+    "id": "transparent",
+    "mode": "transparent",
+    "prompt": "A cute small red panda holding a mint green leaf, premium soft clay 3D sticker illustration, clean white die-cut outline, centered full body, isolated subject, no text, no watermark.",
+    "path": "/imgs/verified/transparent.png",
+    "model": "qwen-image-2.1-pro",
+    "provider": "Alibaba Cloud Bailian",
+    "generatedAt": "2026-10-23T08:24:08.847Z",
+    "durationSeconds": 7.6,
+    "width": 1024,
+    "height": 1024,
+    "transparent": true,
+    "preview": "/imgs/verified/transparent.webp",
+    "submittedPrompt": "This is an RGBA image with transparency. A cute small red panda holding a mint green leaf, premium soft clay 3D sticker illustration, clean white die-cut outline, centered full body, isolated subject, no text, no watermark. The image has alpha channel and the background is transparent."
+  },
+  {
+    "id": "edit",
+    "mode": "edit",
+    "prompt": "Keep the ceramic vase, three lavender tulips and their shape unchanged. Replace only the wall background with a muted sage green wall. Preserve the light oak table and realistic soft morning lighting. No text, no watermark.",
+    "path": "/imgs/verified/edit.png",
+    "model": "qwen-image-2.1-pro",
+    "provider": "Alibaba Cloud Bailian",
+    "generatedAt": "2026-10-23T08:24:20.375Z",
+    "durationSeconds": 11.5,
+    "width": 1024,
+    "height": 1024,
+    "transparent": true,
+    "reference": "/imgs/verified/generate.png",
+    "preview": "/imgs/verified/edit.webp",
+    "submittedPrompt": "Keep the ceramic vase, three lavender tulips and their shape unchanged. Replace only the wall background with a muted sage green wall. Preserve the light oak table and realistic soft morning lighting. No text, no watermark."
+  }
+]
