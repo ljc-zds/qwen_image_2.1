@@ -4,6 +4,7 @@ import { and, desc, eq, isNull } from 'drizzle-orm';
 import { db } from '@/core/db';
 import { aiTask } from '@/config/db/schema';
 import { getUuid } from '@/lib/hash';
+import { galleryPng } from '@/lib/studio-png';
 
 function storage() {
   const {
@@ -37,14 +38,12 @@ export async function saveArtwork(params: {
   prompt: string;
   mode: string;
   ratio: string;
-  url: string;
+  url?: string;
+  png?: Buffer;
   transparent: boolean;
   creditId?: string;
 }) {
-  if (!/^data:image\/png;base64,[A-Za-z0-9+/]+=*$/.test(params.url))
-    throw new Error('invalid_gallery_image');
-  const body = Buffer.from(params.url.split(',')[1], 'base64');
-  if (body.length > 10_000_000) throw new Error('image_too_large');
+  const body = galleryPng(params);
   const id = getUuid(),
     key = `artworks/${id}.png`,
     s = storage();

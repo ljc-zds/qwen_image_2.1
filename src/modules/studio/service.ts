@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 import { envConfigs } from '@/config';
-import { hasPngTransparency } from '@/lib/png-transparency';
+import { prepareStudioPng } from '@/lib/studio-png';
 
 export const studioInput = z
   .object({
@@ -44,7 +44,10 @@ export function isStudioReady() {
 }
 
 // Stable bridge contract; provider-specific payload mapping belongs behind this endpoint.
-export async function createStudioImage(input: z.infer<typeof studioInput>) {
+export async function createStudioImage(
+  input: z.infer<typeof studioInput>,
+  options: { binary?: boolean } = {}
+) {
   if (!isStudioReady()) throw new Error('not_configured');
   const endpoint = new URL(envConfigs.studio_image_endpoint);
   if (
@@ -141,17 +144,11 @@ export async function createStudioImage(input: z.infer<typeof studioInput>) {
       chunks.push(value);
     }
     const png = Buffer.concat(chunks);
-    if (
-      !png.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]))
-    )
-      throw new Error('invalid_provider_result');
-    const transparent = hasPngTransparency(png);
-    if (input.mode === 'transparent' && !transparent)
-      throw new Error('transparency_unavailable');
-    return studioResult.parse({
-      url: 'data:image/png;base64,' + png.toString('base64'),
-      transparent,
-    });
+    return prepareStudioPng(
+      png,
+      input.mode === 'transparent',
+      !!options.binary
+    );
   }
   const result = studioResult.parse(payload);
   if (input.mode === 'transparent' && !result.transparent)

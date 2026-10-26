@@ -1,6 +1,7 @@
 import handler from '@tanstack/react-start/server-entry';
 
 import { getCookieFromHeader } from './lib/cookie';
+import { withPublicPageCache } from './lib/public-page-cache';
 import { startWaffoWorker } from './modules/payment/waffo-service';
 import { paraglideMiddleware } from './paraglide/server.js';
 
@@ -29,23 +30,25 @@ function ensureCloudflareEnv(): Promise<void> {
 // getLocale() resolves per-request (AsyncLocalStorage) during SSR.
 export default {
   async fetch(req: Request): Promise<Response> {
-    await ensureCloudflareEnv();
-    startWaffoWorker();
-    const response = await paraglideMiddleware(req, () => handler.fetch(req));
-    const utmSource = new URL(req.url).searchParams.get('utm_source');
-    const existing = getCookieFromHeader(
-      req.headers.get('cookie'),
-      'utm_source'
-    );
-    if (utmSource && !existing) {
-      const sanitized = utmSource.replace(/[^\w.\-]/g, '').slice(0, 100);
-      if (sanitized) {
-        response.headers.append(
-          'Set-Cookie',
-          `utm_source=${sanitized}; Max-Age=2592000; Path=/; SameSite=Lax`
-        );
+    return withPublicPageCache(req, async () => {
+      await ensureCloudflareEnv();
+      startWaffoWorker();
+      const response = await paraglideMiddleware(req, () => handler.fetch(req));
+      const utmSource = new URL(req.url).searchParams.get('utm_source');
+      const existing = getCookieFromHeader(
+        req.headers.get('cookie'),
+        'utm_source'
+      );
+      if (utmSource && !existing) {
+        const sanitized = utmSource.replace(/[^\w.\-]/g, '').slice(0, 100);
+        if (sanitized) {
+          response.headers.append(
+            'Set-Cookie',
+            `utm_source=${sanitized}; Max-Age=2592000; Path=/; SameSite=Lax`
+          );
+        }
       }
-    }
-    return response;
+      return response;
+    });
   },
 };

@@ -68,8 +68,9 @@ export const Route = createFileRoute('/api/studio/generate')({
               return respErr('insufficient_credits', { status: 402 });
             reservedCreditId = reserved.consumedCredit.id;
           }
-          const result = await createStudioImage(input);
-          if (galleryReady()) {
+          const persist = galleryReady();
+          const result = await createStudioImage(input, { binary: persist });
+          if (persist) {
             return respData(
               await saveArtwork({
                 ...input,
@@ -79,6 +80,8 @@ export const Route = createFileRoute('/api/studio/generate')({
               })
             );
           }
+          // Binary results are internal to storage; never serialize a Buffer to clients.
+          if ('png' in result) throw new Error('unexpected_binary_result');
           return respData(result);
         } catch {
           if (reservedCreditId) await revoke(reservedCreditId);
