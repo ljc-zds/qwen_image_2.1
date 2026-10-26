@@ -75,3 +75,6 @@ package-lock.json
 /docs/design-references/
 /docs/research/*.json
 /assets/prompt-library/*.zip
+
+# Build-time public route inventory.
+.static-pages.json

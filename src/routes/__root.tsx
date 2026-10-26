@@ -9,11 +9,12 @@ import {
   Scripts,
   type ErrorComponentProps,
 } from '@tanstack/react-router';
-import { createServerFn } from '@tanstack/react-start';
 import { ThemeProvider } from 'next-themes';
 
 import { envConfigs } from '@/config';
+import { ClientAttribution } from '@/lib/client-attribution';
 import { getQueryClient } from '@/lib/query-client';
+import { useSiteDisplay } from '@/lib/site-display';
 import { getLocale } from '@/paraglide/runtime.js';
 import { Ads } from '@/components/analytics/ads';
 import { FirstPartyAnalytics } from '@/components/analytics/first-party';
@@ -32,31 +33,8 @@ import '@/styles/globals.css';
 
 // Analytics IDs live in the DB config (1h-cached service). Fetched via a
 // server function so drizzle/db code never reaches the client bundle.
-const getAnalyticsConfigs = createServerFn().handler(async () => {
-  const { getAllConfigs } = await import('@/modules/config/service');
-  const configs = await getAllConfigs();
-  return {
-    gaId: configs.google_analytics_id?.trim() || '',
-    plausibleDomain: configs.plausible_domain?.trim() || '',
-    plausibleSrc: configs.plausible_src?.trim() || '',
-    adsenseCode: configs.adsense_code?.trim() || '',
-    crispWebsiteId:
-      configs.crisp_enabled === 'true'
-        ? configs.crisp_website_id?.trim() || ''
-        : '',
-    tawkPropertyId:
-      configs.tawk_enabled === 'true'
-        ? configs.tawk_property_id?.trim() || ''
-        : '',
-    tawkWidgetId:
-      configs.tawk_enabled === 'true'
-        ? configs.tawk_widget_id?.trim() || ''
-        : '',
-  };
-});
 
 export const Route = createRootRoute({
-  loader: () => getAnalyticsConfigs(),
   head: () => {
     // Each page owns its canonical and language alternate links.
     return {
@@ -89,7 +67,7 @@ export const Route = createRootRoute({
 });
 
 function RootComponent() {
-  const analytics = Route.useLoaderData();
+  const analytics = useSiteDisplay();
 
   return (
     <QueryClientProvider client={getQueryClient()}>
@@ -100,6 +78,7 @@ function RootComponent() {
         disableTransitionOnChange
       >
         <Outlet />
+        <ClientAttribution />
         <SandboxPreviewBridge />
         <Toaster position="top-center" richColors />
         <GoogleOneTap />

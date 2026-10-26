@@ -7,6 +7,7 @@ import viteReact from '@vitejs/plugin-react';
 import { nitro } from 'nitro/vite';
 import { defineConfig } from 'vite';
 
+import { staticPageOptions, staticPrerender } from './scripts/static-routes';
 import { loadEnvFiles } from './src/lib/env';
 
 // Populate process.env from .env.local / .env.{NODE_ENV} / .env for the
@@ -102,6 +103,8 @@ export default defineConfig({
     }),
     tanstackStart({
       srcDirectory: 'src',
+      prerender: staticPrerender,
+      pages: staticPageOptions,
     }),
     viteReact(),
     nitro(),
